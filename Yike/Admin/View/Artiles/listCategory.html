@@ -1,0 +1,45 @@
+<include file="Index/header" />
+
+
+<div class="header"><span></span>文章分类</div>
+<div class="h6bg"></div>
+<div class="content">
+
+	<form action="" class="sourch" method="post">
+		<a class="fr"  href="{:U('Artiles/editCategory')}">+ 新增文章分类</a>
+	</form>
+
+	<table cellpadding="0" cellspacing="0" class="tableList">
+		<tr>
+			<th width="30"><input type="checkbox" class="all"></th>
+			<th width="70">分类ID</th>
+		    <th width="150">名称</th>   
+		    <th width="100">是否显示</th>
+		    <th width="50">排序</th>
+		    <th width="150">操作</th>
+		</tr>
+		<volist name="list" id="vo">
+		<tr id="id{$vo.tag_id}">
+			<td><input type="checkbox" class="id" value="{$vo.cat_id}"></td>
+			<td>{$vo.cat_id}</td>
+		    <td>{$vo.cat_name}</td>
+		     <td><switch name="vo.is_show">
+		    <case value="0"><img src="/Public/Admin/images/no.png" class="boole"></case>
+		    <case value="1"><img src="/Public/Admin/images/yes.png"  class="boole"></case>
+		    <defalut />错误参数
+		    </switch></td>
+		    <td><span class="sort" data-id="{$vo.cat_id}">{$vo.sort}</span></td>
+		    <td><a href="{:U('editCategory',['id'=>$vo['cat_id']])}">修改</a>
+		    <a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('delCategory',['id'=>$vo['cat_id']])}';}">删除</a> </td>
+		</tr>
+		
+		</volist>
+		
+		<tr>
+		<th colspan="9">{$page}</th>
+		</tr>
+
+	</table>
+</div>
+
+<include file="Index/footer" />

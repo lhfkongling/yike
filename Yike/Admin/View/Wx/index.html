@@ -1,0 +1,38 @@
+<include file="Index/header" />
+<script>
+var updateUrl = '{:U("updateField")}';
+</script>
+
+<div class="header"><span></span>微信</div>
+<div class="h6bg"></div>
+<div class="content main">
+  <ul class="navMain user">
+  	<p><font>微信操作</font></p>
+    <li> <a href="{:U('Wx/config')}">
+      <div class="fl reg_user"  data-type="user"></div>
+      <div class="fr"><span >
+        <配置>
+        </span></div>
+      </a> <a href="{:U('Wx/menuList')}">
+      <div class="fl use_user"  data-type="user"></div>
+      <div class="fr"><span >
+        <自定义栏目>
+        </span></div>
+      </a> 
+      <a href="{:U('Wx/listAutoreply')}">
+      <div class="fl use_user"  data-type="user"></div>
+      <div class="fr"><span >
+        <自动回复>
+        </span></div>
+      </a> 
+      
+      <a href="{:U('Wx/listUserMessage')}">
+      <div class="fl use_user"  data-type="user"></div>
+      <div class="fr"><span >
+        <咨询信息>
+        </span></div>
+      </a>  </li>
+    
+  </ul>
+</div>
+<include file="Index/footer" />

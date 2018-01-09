@@ -1,0 +1,192 @@
+<include file="Index:header" />
+		<div class="mui-content">
+			<form action="" method="post" id="updateFile" class="mui-input-group">
+				
+				<ul class="ul-block">
+					<li class="mui-input-row">
+						<label>楼盘名称</label>
+						<input type="text" name="name" value="{$row.name}" class="mui-input-clear" placeholder="请输入楼盘名称">
+					</li>
+					<li class="mui-input-row">
+						<label>建面</label>
+						<span class="unit">㎡</span>
+						<input type="text" name="area" value="{$row.area}" class="mui-input-clear" placeholder="请输入建设面积">
+					</li>
+					<li class="mui-input-row">
+						<label>地址</label>
+						<input type="text" name="address" value="{$row.address}" class="mui-input-clear" placeholder="请输入楼盘所在地址">
+					</li>
+					
+					<li class="mui-input-row">
+						<label>均价</label>
+						<span class="unit">元/㎡</span>
+						<input type="text" name="average_price" value="{$row.average_price}" class="mui-input-clear" placeholder="请输入均价">
+
+					</li>
+					<li class="mui-input-row">
+						<label>特价</label>
+						<span class="unit">元/㎡</span>
+						<input type="text" name="bargain_price" value="{$row.bargain_price}" class="mui-input-clear" placeholder="请输入特价">
+
+					</li>
+					<li class="mui-input-row">
+						<label>交房时间</label>
+						<input type="text" name="give_time" value="{$row.give_time}" class="mui-input-clear" placeholder="请选择交房时间">
+
+					</li>
+					
+					
+					
+					
+					<li></li>
+					
+				</ul>
+				<ul  class="ul-block">
+					<li class="mui-input-row img">
+						<label>楼盘图片</label>
+						<volist name="row.picture" id="vo"> 
+							<img  class="upImg" id="old{$vo.picture_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>" >
+				            <input type="hidden" name="picture[]" class="pichidden"  value="{$vo.url}" />
+				            <input type="hidden" name="picture_id[]"  value="{$vo.picture_id}" />
+			          </volist>
+			          <for start="0" end="$pic_num"> 
+			          		<img  class="upImg" id="new{$i}" src="__PUBLIC__/Home/images/add.png" >
+			            	<input type="hidden" name="picture[]" class="pichidden"   value="" />
+			          </for>
+          
+					</li>
+					<li></li>
+				</ul>
+				
+				<ul  class="ul-block housetype img">
+					<li class="mui-input-row">
+						<label>在售户型</label>
+						<font data-type="housetype" class="add">添加户型</font>
+					</li>
+					<volist name="row.housetype" id="vo"> 
+					<li class="mui-input-row ">
+						<label class="input">
+							<img id="type{$vo.type_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>" >
+            				<input type="hidden" name="housetype[url][]" class="pichidden"  value="{$vo.url}" />
+						</label>
+						<font data-id="{$vo.type_id}"  data-type="house_type"  class="del">-</font>
+		            	<input type="hidden" name="housetype[type_id][]"  value="{$vo.type_id}" />
+		            	<input type="hidden" name="housetype[build_id][]"  value="{$row.build_id}" />
+		            	<input type="text" name="housetype[type][]"  value="{$vo.type}" />
+		            	<input type="text" name="housetype[area][]"  value="{$vo.area}" />户型：<br/>面积：
+						
+					</li>
+					</volist>
+					
+					
+					
+					<li></li>
+					
+				</ul>
+				
+				<ul  class="ul-block important">
+					<li class="mui-input-row">
+						<label>重要属性</label>
+						<font data-type="important" class="add">添加属性</font>
+					</li>
+					<volist name="row.important" id="vo"> 
+					<li class="mui-input-row ">
+						<label class="input">
+							<input type="text" name="important[code][]" value="{$vo.code}" class="mui-input-clear" placeholder="请输入键">
+						</label>
+						<input type="text" name="important[val][]" value="{$vo.val}" class="mui-input-clear" placeholder="请输入值">
+						<input type="hidden" name="important[type_id][]"  value="{$row.build_id}" />
+            			<input type="hidden" name="important[type][]"  value="1" />
+            			<input type="hidden" name="important[im_id][]"  value="{$vo.im_id}" />
+						<font data-id="{$vo.im_id}"  data-type="important"  class="del">-</font>
+					</li>
+					</volist>
+					<li></li>
+					
+				</ul>
+				
+				<ul  class="ul-block important">
+					<li class="mui-input-row">
+						<label>次要属性</label>
+						<font data-type="secondary" class="add">添加属性</font>
+					</li>
+					<volist name="row.secondary" id="vo"> 
+					<li class="mui-input-row ">
+						<label class="input">
+							<input type="text" name="secondary[code][]" value="{$vo.code}" class="mui-input-clear" placeholder="请输入键">
+						</label>
+						<input type="text" name="secondary[val][]" value="{$vo.val}" class="mui-input-clear" placeholder="请输入值">
+						<input type="hidden" name="secondary[type_id][]"  value="{$row.build_id}" />
+            			<input type="hidden" name="secondary[type][]"  value="1" />
+            			<input type="hidden" name="secondary[se_id][]"  value="{$vo.se_id}" />
+						<font data-id="{$vo.se_id}"  data-type="secondary"  class="del">-</font>
+					</li>
+					</volist>
+					<li></li>
+				</ul>
+				
+				
+				<ul  class="ul-block">
+					
+					
+					
+					<li class="mui-input-row">
+						<label>周边地图</label>
+						<input type="text" name="perimeter_map" value="" readonly="" class="mui-input-clear" placeholder="请联系客服添加地图">
+
+					</li>
+					<li class="mui-input-row">
+						<label>周边介绍</label>
+						<input type="text" name="perimeter_introduce" value="{$row.perimeter_introduce}" class="mui-input-clear" placeholder="请输入周边介绍">
+
+					</li>
+					<li class="mui-input-row">
+						<label>楼盘简介</label>
+						<input type="text" name="brief" value="{$row.brief}" class="mui-input-clear" placeholder="请输入楼盘简介">
+
+					</li>
+					<li></li>
+				</ul>
+				
+				<ul  class="ul-block">
+					
+					
+					<li class="mui-input-row">
+						<label>联系人</label>
+						<input type="text" name="linkman" value="{$row.linkman}" class="mui-input-clear" placeholder="请输入联系人">
+
+					</li>
+					
+					<li class="mui-input-row">
+						<label>联系电话</label>
+						<input type="text" name="telephone" value="{$row.telephone}" class="mui-input-clear" placeholder="请输入联系电话">
+
+					</li>
+					
+				
+					<li></li>
+				</ul>
+				
+				<ul  class="ul-block">
+					<li class="btn">
+						<input type="hidden" name="user_id" value="{$Think.session.user.user_id}" />
+						<input type="hidden" name="build_id" value="{$row.build_id}" />
+						<button type="submit" class="mui-btn-primary mui-btn-block">提 交</button>
+					
+					</li>
+					<li></li>
+				</ul>
+				</form>
+		</div>
+		
+<include file="Index:footer" />
+<include file="Buildings:upbase64Image" />
+<script>
+	  var updateUrl = '{:U("updateField")}',
+  	  checkRepeatName = '{:U("checkRepeatName")}',
+  	  deleteAttr = '{:U("deleteAttr")}',
+  	  imagesCount = '{$row.imgCount}',  	  
+  	  type_id = '{$row.build_id}',
+  	  typeVal = 1;
+   
+</script>

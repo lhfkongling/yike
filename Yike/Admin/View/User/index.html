@@ -1,0 +1,25 @@
+<include file="Index/header" />
+<script>
+var updateUrl = '{:U("updateField")}';
+</script>
+
+<div class="header"><span></span>会员</div>
+<div class="h6bg"></div>
+<div class="content">
+  <ul class="navMain user">
+  	<p><font>会员类型</font></p>
+    <li> <a href="{:U('User/usersList',['type'=>2])}">
+      <div class="fl reg_user"  data-type="user"></div>
+      <div class="fr">{$register|resetFormatNumber=###}<span >
+        <注册用户>
+        </span></div>
+      </a> <a href="{:U('User/usersList',['type'=>3])}">
+      <div class="fl use_user"  data-type="user"></div>
+      <div class="fr">{$user|resetFormatNumber=###}<span >
+        <付费会员>
+        </span></div>
+      </a>  </li>
+    
+  </ul>
+</div>
+<include file="Index/footer" />

@@ -1,0 +1,65 @@
+<include file="Index/header" />
+<script>
+var updateUrl = '{:U("updateActorField")}';
+</script>
+</head>
+
+<body>
+
+<div class="header"><span></span>用户
+<font><if condition="$data.type eq 3">付费会员<else/>注册用户</if>  &gt; 列表</font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+
+<form action="" class="sourch" method="post" onsubmit="return sourchTagList()">
+	<!--<a class="fr" href="{:U('usersEdit')}">+ 新增用户</a>-->
+    <strong>信息筛选：</strong>
+      邮箱： <input type="text" name="user_name" class="text" value="{$data.user_name}"  placeholder="输入用户邮箱">
+   
+    <input type="submit" class="subBtn" value="搜&nbsp;&nbsp;索">
+    <input type="hidden" name="order" value="{$data.order}"/>
+    <input type="hidden" name="sort" value="{$data.sort}"/>
+    <input type="hidden" name="type" value="{$data.type}"/>
+</form>
+
+<table cellpadding="0" cellspacing="0" class="tableList">
+<tr>
+	<th width="30"><input type="checkbox" class="all"></th>
+	<th width="70"> <if condition="$data.type eq 3">会员<else/>用户</if>ID <i><a class="asc" title="升序" href="{:U('actorsList',['user_name'=>$data['user_name'],'email'=>$data['email'],'type'=>$data['type'],'order'=>'user_id','sort'=>'asc'])}"></a> <a class="desc" title="降序"  href="{:U('actorsList',['actor_name'=>$data['actor_name'],'order'=>'user_id','sort'=>'desc'])}"></a></i></th>
+    <th width="100">头像</th>
+    <th width="100">邮箱</th>   
+    <th width="70">用户类型</th>
+    <th width="100">注册时间</th>
+    <th width="100">到期期限</th>
+    <th width="150">操作</th>
+</tr>
+<volist name="list" id="vo">
+<tr id="id{$vo.user_id}">
+	<td><input type="checkbox" class="id" value="{$vo.user_id}"></td>
+	<td>{$vo.user_id}</td>
+     <td><img src="<if condition="$vo.face_url neq ''">{$vo.face_url|getCdnUrl=###}<else/>{:getCdnUrl('System/Web/default_userheader.png')}</if>" width="50"></td> 
+    <td>{$vo.user_name}</td>
+    <td><switch name="vo.type">
+    <case value="1">注册用户</case>
+    <case value="2">临时会员</case>
+    <case value="3">付费会员</case>
+    <default/>游客
+    </switch></td>
+    <td>{$vo.add_time}</td>
+    <td><if condition="$vo.type gt 1">{$vo.expire}</if></td>
+
+    <td>
+    <a href="{:U('usersEdit',['id'=>$vo['user_id']])}">修改</a>
+    <a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('usersDelete',['user_name'=>$data['user_name'],'email'=>$data['email'],'type'=>$data['type'],'p'=>$data['p'],'order'=>$data['order'],'sort'=>$data['sort'],'id'=>$vo['user_id']])}';}">删除</a>
+     </td>
+</tr>
+</volist>
+
+<tr>
+<th colspan="9">{$page}</th>
+</tr>
+
+</table>
+</div>
+<include file="Index/footer" />

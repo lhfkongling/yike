@@ -1,0 +1,79 @@
+<include file="Index/header" />
+<script>
+  var updateUrl = '{:U("updateField")}';
+  var checkRepeatName = '{:U("Video/checkRepeatName")}';
+  var imagesCount = {$row.imgCount};
+  </script>
+</head>
+
+<body>
+<div class="header"><span></span>广告
+<font> 广告 &gt; <if condition="$row.ad_id gt 0">修改广告<else/>新增广告</if> </font>
+
+</div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit "  onsubmit="return checkAdEdit(this)">
+    <ul class="field">
+      <li><span><i>*</i>广告名称</span>
+        <input type="text" name="ad_name" class="checkName" data-type="ad" placeholder="请输入广告名称" value="{$row.ad_name}">
+         <font class="tip">广告名称已经在，请重新填写</font>
+
+      </li>
+      <li><span>标识符</span>
+        <input type="text" name="code" placeholder="请输入标识符" value="{$row.code}">
+       </li>
+         <li><span>上下架</span>
+         <label>  <input type="radio" name="is_show" 
+            
+            <if condition="$row.is_show eq '1'"> checked="checked" </if>
+            value="1"> <img src="__PUBLIC__/Admin/images/yes.png" class="boole"></label>
+        <label> <input type="radio" name="is_show" 
+            
+            <if condition="$row.is_show eq '0'"> checked="checked" </if>
+            value="0"> <img src="__PUBLIC__/Admin/images/no.png" class="boole"></label>
+       
+      </li>	
+       
+       
+       
+      <li class="brief"><span><i>*</i>备注</span>
+        <textarea name="note" placeholder="请输入备注">{$row.note}</textarea>
+        <p>{$row.noteCount}/250</p>
+      </li>
+    </ul>
+    <div class="images">  <div class="box"><span><i>*</i>广告图片</span>
+      <div class="fl">
+        <p>
+ 上传图片格式png,jpg,gif,图片文件大小不能超过100kb。</p>
+        <input type="button" class="button" data-type='ad' value="上传图片" />
+        <dl class="ad">
+        	
+        	
+        <foreach name="row.info" item="vo">
+         <dd> <img src="{$vo['img_url']}">
+         	<input type="file" name="furl{$key}" id="furl{$key}" class="file" />
+            <input type="hidden" name="imgs_url[]" value="{$vo.img_url}" />
+         
+           跳转路径 
+           <input type="text" name="param[]" value="{$vo.param}"/>
+           <br/>
+           图片名称 
+           <input type="text" name="name[]" value="{$vo.name}"/>
+        <br/>
+            <font>删除</font>
+            
+            </dd>
+          </foreach>  
+        </dl>
+      </div>
+    </div>
+    </div>
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+      <input type="hidden" name="id" value="{$row.ad_id}">
+    </div>
+  </form>
+</div>
+<include file="Index/footer" />

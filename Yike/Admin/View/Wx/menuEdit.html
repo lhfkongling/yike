@@ -1,0 +1,113 @@
+<include file="Index/header" />
+  <script src="/Public/Common/js/jedate/jedate.js" type="text/javascript"></script>
+  <script>
+  var imagesCount = parseInt('{$row.imgCount}');
+  var checkRepeatField = '{:U("checkRepeatField")}';
+  </script>
+
+<div class="header"><span></span>微信<font> 自定义菜单  &gt; 编辑</font></div>
+
+<div class="h6bg"></div>
+<div class="content">
+    <form action="" method="post" class="tableEdit user "  onsubmit="return checkuserEdit(this)">
+    <ul class="field">
+        <li><span><i>*</i>名称</span> <input type="text" name="name"   placeholder="名称" value="{$row.name}"></li>
+        
+        <li><span>类型</span>
+        <select name="type" class="width500"  >
+            <option value="">请选择</option>
+            <option value="click" 
+            <if condition="$row.type eq 'click'">selected="selected" </if>
+            >点击推事件
+            </option>
+            <option value="view" 
+            <if condition="$row.type eq 'view'">selected="selected" </if>
+            >跳转URL
+            </option>
+            <option value="scancode_push" 
+            <if condition="$row.type eq 'scancode_push'">selected="selected" </if>
+            >扫码推事件
+            </option>
+            <option value="scancode_waitmsg" 
+            <if condition="$row.type eq 'scancode_waitmsg'">selected="selected" </if>
+            >扫码推事件且弹出
+            </option>
+             <option value="pic_sysphoto" 
+            <if condition="$row.type eq 'pic_sysphoto'">selected="selected" </if>
+            >弹出系统拍照发图
+            </option>
+             <option value="pic_photo_or_album" 
+            <if condition="$row.type eq 'pic_photo_or_album'">selected="selected" </if>
+            >弹出拍照或者相册发图
+            </option>
+             <option value="pic_weixin" 
+            <if condition="$row.type eq 'pic_weixin'">selected="selected" </if>
+            >弹出微信相册发图器
+            </option>
+             <option value="location_select" 
+            <if condition="$row.type eq 'location_select'">selected="selected" </if>
+            >弹出地理位置
+            </option>
+             <option value="media_id" 
+            <if condition="$row.type eq 'media_id'">selected="selected" </if>
+            >下发消息
+            </option>
+             <option value="view_limited" 
+            <if condition="$row.type eq 'view_limited'">selected="selected" </if>
+            >跳转图文消息URL
+            </option>
+          </select>
+     
+      </li>
+       <li><span>上级</span>
+        <select name="parent_id" class="width500" >
+            <option value="0">顶级</option>
+            <volist name="list" id="vo">
+           
+            
+            <option value="{$vo.menu_id}"  <if condition="$row[parent_id] eq $vo[menu_id]">selected="selected" </if> >&nbsp;&nbsp;{$vo.name}</option>
+            	<volist name="vo.sub_button" id="v">
+                <option value="{$v.menu_id}" <if condition="$row[parent_id] eq $v[menu_id]">selected="selected" </if> >&nbsp;&nbsp;&nbsp;&nbsp;{$v.name}</option>
+                
+                </volist>
+            </volist>
+          </select>
+     
+      </li>
+      
+        <li><span>值</span>
+        <input type="text" name="url" class="width500"   value="{$row.url}">
+       
+      </li>
+      </ul>
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+        <input type="submit" class="sub" value="保存" />
+        <input type="hidden" name="menu_id" value="{$row.menu_id}">
+      </div>
+  </form>
+    </span> </div>
+<script type="text/javascript">
+	  var imagesCount = parseInt('{$row.imgCount}');
+  	  var checkRepeatField = '{:U("checkRepeatField")}';
+    jeDate({
+		dateCell:"#expire",
+		format:"YYYY-MM-DD",
+		isinitVal:false,
+		isTime:true, 
+		minDate:"2017-05-01",
+		okfun:function(val){alert(val)}
+	})
+	   jeDate({
+		dateCell:"#birthday",
+		format:"YYYY-MM-DD",
+		isinitVal:false,
+		isTime:true, 
+		minDate:"1917-05-01",
+		okfun:function(val){alert(val)}
+	})
+	
+ 
+</script>
+<include file="Index/footer" />

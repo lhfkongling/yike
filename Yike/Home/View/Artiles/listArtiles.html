@@ -1,0 +1,46 @@
+<include file="Index:header" />
+
+		<div class="mui-content" style="padding-bottom: 55px;">
+			<div id="slider" class="mui-slider">
+				<div class="mui-content-padded" style="margin: 5px;">
+				<div class="mui-input-row mui-search">
+					<input type="search" id="search" class="mui-input-clear" value="" placeholder="请输入查找的内容">
+				</div>
+
+			</div>
+			<div id="segmentedControl" class="mui-segmented-control atrileCategory" style="border:#e6e6e6 solid 1px;; background: #ebebeb; color: #6641E2;">
+            <volist name="cat" id="vo">
+				<a class="mui-control-item <if condition="$catid eq $vo[cat_id]"> mui-active</if>"  href="{:U('Artiles/listArtiles',['catid'=>$vo[cat_id]])}">{$vo.cat_name}</a>
+                </volist>
+				
+			</div>
+
+			<div id="item1" class="mui-control-content mui-active list">
+				<ul id="artileList" data-type="Atrile" data-prefix="a" class="contentlist mui-table-view">
+
+				</ul>
+				<button class="addMore ">加载更多</button>
+			</div>
+			
+            
+			<!--
+            	作者：33191690@qq.com
+            	时间：2017-09-24
+            	描述：-->
+			<div class="padding1em mui-text-center">
+				<h6>广西蚁客科技有限公司版权所有</h6>
+			</div>
+		</div>
+	
+    	 <include file="Index:nav" />
+         <include file="Index:footer" />
+       <script type="text/javascript">
+	   var 	ajaxListPage = "{:U('ajaxListPage')}",
+	   	   	catid = '{$catid}',
+	   	   	showUrl=  "{:U('show',['id'=>'00'])}",
+	   	   	page = 1,
+	   	   	keyword = 1;
+	   
+	   
+	   
+	   </script>

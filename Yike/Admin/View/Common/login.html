@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>蚁客后台管理系统</title>
+<link href="/Public/Admin/css/style.css" rel="stylesheet" />
+<script src="/Public/Common/js/jquery-1.10.2.min.js"></script>
+<script src="/Public/Common/js/popShow.js"></script>
+<script src="/Public/Admin/js/common.js"></script>
+</head>
+
+<body class="index">
+<div class="top">
+		
+    	<img src="/Public/Home/images/logo.png">
+  
+</div>
+
+<form class="adminlogin" action="" method="post" onsubmit="return checkAdminLogin(this);">
+	<h3>蚁客管理系统</h3>
+    
+    <ul class="">
+    	<li><span>用户名：</span><input type="text" name="admin_name" value=""></li>
+        <li><span>密&nbsp;&nbsp;&nbsp;码：</span><input type="password" name="password" value=""></li>
+        <eq name="isShowCode" value="1">
+        <li><span>验证码：</span><input type="text" name="code" class="code" value=""><img src="{:U('code')}" id="code" alt="验证码" title="点击换一组" onclick="this.src='\\Admin\\User\\Code'">
+        <a onclick="javascript:$('#code').attr('src','\\Admin\\User\\Code')">换一组</a></li>
+        </eq>
+        <li><span></span><input type="submit" class="submit" value="登  录"></li>
+    </ul>
+</form>
+  <div class="footer">Coperight @2017-2018 蚁客 版权所有</div>
+
+</body>
+</html>

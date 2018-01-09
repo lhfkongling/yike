@@ -1,0 +1,36 @@
+<include file="Index:header" />
+
+	<div class="mui-content certficate">
+		<img class="logo" src="__PUBLIC__/Home/images/logo.png" />
+		
+		
+		<h1>工作证</h1>
+		<h5>WORKING CARD</h5>
+		
+		<img src="<if condition="$row.work_url eq ''">__PUBLIC__/Home/images/work_face.png<else />{$row.work_url}</if>"  class="work-face" />
+		<h5>{$row.name} &nbsp;&nbsp; 
+			<if condition="$row.sex eq 1">男<else/>女</if>&nbsp;&nbsp; 
+			<font class="examine{$row.authentication}"> 
+				<switch name="row.authentication">
+					<case value="-1">认证失败</case>					
+					<case value="1">审核中</case>
+					<case value="2">已认证</case>
+					<default />未认证
+				</switch>
+			</font>
+		</h5>
+		<h5>{$row.uuid}</h5>
+		
+		<div class="remark">
+		1、本工作证只限蚁客平台人员使用，转借无效。<br/>
+		2、对客户及房地产商请展示本证。<br/>
+		3、非蚁客平台人员请认证。<br/>
+		4、如有疑问，请及时到蚁客客服中心提问。<br/>
+		5、如拾到本证、请交还本公司。<br/>
+		</div>
+		
+<p>编号： YK20170512001</p>
+<P>投诉电话：0779-2365888 蚁客平台最终解释权</P>
+	</div>
+<include file="Index:footer" />
+

@@ -1,0 +1,52 @@
+<include file="Index/header" />
+<script>
+  var updateUrl = '{:U("updateField")}';
+  var imagesCount = 0;
+</script>
+
+
+<div class="header"><span></span>微信<font>  微信配置 </font></div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit "  onsubmit="return checkAppEdit(this)">
+  
+  	   
+    <ul class="field">
+     <li><span>appid</span>
+        <input type="text" name="appid" class="width500" value="{$row.appid}">
+      </li>
+    
+      <li><span>token</span>
+        <input type="text" name="token" class="width500" value="{$row.token}">
+      </li>
+
+       <li><span>encodingaeskey</span>
+       <input type="text" name="encodingaeskey" class="width500" placeholder="" value="{$row.encodingaeskey}">
+       
+      </li>
+
+    
+      
+       <li><span>appsecret</span>
+       <input type="text" name="appsecret" class="width500" placeholder="" value="{$row.appsecret}">
+      
+       </li>
+      
+       
+            <li><span>回调地址</span>
+        <input type="text" name="WechatCallback"  class="width500" placeholder="" value="{$row.WechatCallback}">
+       </li>
+     
+        
+    
+    </ul>
+  
+    
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+    </div>
+  </form>
+</div>
+<include file="Index/footer" />

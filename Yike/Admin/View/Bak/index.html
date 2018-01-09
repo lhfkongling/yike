@@ -1,0 +1,53 @@
+<include file="Index/header" />
+
+<div class="header"><span></span>系统设置 <font>数据库在线备份下载和还原</font></div>
+<div class="h6bg"></div>
+<div class="content">
+   <table class="list tableList"  cellpadding="" cellspacing="0">
+                    <tbody>
+                        <tr class="tr_head">
+                            <th width="40px">序号</th>
+                            <th>文件名</th>
+                            <th width="150px">备份时间</th>
+                            <th width="130px">文件大小</th>
+                            <th width="100px">操作</th>
+
+                        </tr>
+                        <notempty  name="lists">
+
+                            <foreach name="lists" key="key" item="row">
+                                <if condition="$key gt 1">
+                                    <tr>
+                                        <td>{$key-1}</td>
+                                        <td style="text-align: left"><a href="{:U('Bak/index',array('Action'=>'download','file'=>$row))}">{$row}</a></td>
+                                        <td>{$row|getfiletime=$datadir} </td>
+                                        <td>{$row|getfilesize=$datadir}</td>
+                                        <td>
+                                            <a href="{:U('Bak/index',array('Action'=>'download','file'=>$row))}">下载</a>
+                                            <a onclick="return confirm('确定将数据库还原到当前备份吗？')"href="{:U('Bak/index',array('Action'=>'RL','File'=>$row))}">还原</a>
+                                            <a onclick="return confirm('确定删除该备份文件吗？')"href="{:U('Bak/index',array('Action'=>'Del','File'=>$row))}">删除</a>
+                                        </td>
+                                    </tr>
+                                </if>
+                            </foreach>
+                            <else/>
+                            <tr>
+                                <td colspan="7">没有找到相关数据。</td>
+                            </tr>
+
+                        </notempty>
+                    </tbody>
+                </table>
+                 <div class="sourch">
+                 <a class="submit fr" type="button" onClick="location.href = '{:U('index',['Action' =>'backup'])}'">备份添加</a>
+                </div>
+                <p>     
+                  
+                    
+                    
+                    
+                </p>
+</div>
+
+</body>
+</html>

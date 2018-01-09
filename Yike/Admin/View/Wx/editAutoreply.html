@@ -1,0 +1,34 @@
+<include file="Index/header" />
+
+
+<script>
+  var updateUrl = '{:U("updateField")}';
+  var checkRepeatName = '{:U("checkRepeatName")}';
+  var imagesCount = '{$row.imgCount}';
+  </script>
+
+<div class="header"><span></span>微信
+<font> 自动回复 &gt; <if condition="$row.id gt 0">修改<else/>新增</if> </font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit">
+    <ul class="field">
+      <li><span><i>*</i>关键字</span>
+        <input type="text" name="key" id="key" class="checkName" data-type="tags" data-tip="关键字已经在，请重新填写" placeholder="请输入关键字" value="{$row.key}"> <font class="tip">关键字已经在，请重新填写</font>
+      </li>
+      
+       <li><span>回复内容</span> <textarea name="value">{$row.value}</textarea></li>
+    </ul>
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+      <input type="hidden" name="id" value="{$row.id}">
+    </div>
+  </form>
+  </span> </div>
+
+
+
+<include file="Index/footer" />

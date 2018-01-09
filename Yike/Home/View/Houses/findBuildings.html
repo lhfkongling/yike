@@ -1,0 +1,156 @@
+<include file="Index:header" />
+
+		<div class="mui-content" style="padding-bottom: 55px; padding-top: 45px;background: #FFFFFF;">
+
+			<div id="slider" class="mui-slider">
+
+				<form class="mui-input-group" action="{:U('listHouses')}" method="post">
+
+
+					<div class="mui-input-row zhaofang_label"><label>需求类型</label>
+						<select name="tag" style="color: #929292;">
+							<option value="">不限制</option>
+							<option value="2" <if condition="$tag eq 2"> selected="selected" </if> >二手房</option>
+							<option value="1" <if condition="$tag eq 1"> selected="selected" </if> >新房</option>
+						</select>
+					</div>
+					
+
+					<div class="mui-input-row zhaofang_label"><label>面积</label>
+						<select name="area_id" style="color: #929292;">
+							<option value="">请选择面积</option>
+							<volist name="area" id="vo">
+								<option value="{$vo.id}" <if condition="$row.area_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>朝向</label>
+						<select name="orientation_id" style="color: #929292;">
+							<option value="">请选择朝向</option>
+							<volist name="orientation" id="vo">
+								<option value="{$vo.id}" <if condition="$row.orientation_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>房龄</label>
+						<select name="age_id" style="color: #929292;">
+							<option value="">请选择房龄</option>
+							<volist name="age" id="vo">
+								<option value="{$vo.id}" <if condition="$row.age_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>楼层</label>
+						<select name="floor_id" style="color: #929292;">
+							<option value="">请选择楼层</option>
+							<volist name="floor" id="vo">
+								<option value="{$vo.id}" <if condition="$row.floor_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+					</div>
+
+					<div class="mui-input-row zhaofang_label"><label>来源</label>
+						<select name="from_id" style="color: #929292;">
+							<option value="">请选择房屋户型</option>
+							<volist name="from" id="vo">
+								<option value="{$vo.id}" <if condition="$row.from_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>类型</label>
+						<select name="type_id" style="color: #929292;">
+							<option value="">请选择房屋户型</option>
+							<volist name="type" id="vo">
+								<option value="{$vo.id}" <if condition="$row.type_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>产权</label>
+						<select name="property_id" style="color: #929292;">
+							<option value="">请选择产权</option>
+							<volist name="property" id="vo">
+								<option value="{$vo.id}" <if condition="$row.property_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>装修</label>
+						<select name="fitment_id" style="color: #929292;">
+							<option value="">请选择装修</option>
+							<volist name="fitment" id="vo">
+								<option value="{$vo.id}" <if condition="$row.fitment_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>特色</label>
+						<select name="nature_id" style="color: #929292;">
+							<option value="">请选择特色</option>
+							<volist name="nature" id="vo">
+								<option value="{$vo.id}" <if condition="$row.nature_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+
+
+					<div class="mui-content-padded">
+
+						<button type="submit" class="mui-btn mui-btn-primary mui-btn-block">搜索</button>
+
+					</div>
+				</form>
+			</div>
+			<!--
+            	作者：33191690@qq.com
+            	时间：2017-09-24
+            	描述：-->
+
+			<include file="Index:nav" />
+			<include file="Index:footer" />
+
+			<script>
+				mui.init({
+					swipeBack: true //启用右滑关闭功能
+				});
+				
+
+				var nativeWebview, imm, InputMethodManager;
+				var initNativeObjects = function() {
+					if(mui.os.android) {
+						var main = plus.android.runtimeMainActivity();
+						var Context = plus.android.importClass("android.content.Context ");
+						InputMethodManager = plus.android.importClass("android.view.inputmethod.InputMethodManager ");
+						imm = main.getSystemService(Context.INPUT_METHOD_SERVICE);
+					} else {
+						nativeWebview = plus.webview.currentWebview().nativeInstanceObject();
+					}
+				};
+				var showSoftInput = function() {
+					if(mui.os.android) {
+						imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
+					} else {
+						nativeWebview.plusCallMethod({
+							"setKeyboardDisplayRequiresUserAction ": false
+						});
+					}
+					setTimeout(function() {
+						var inputElem = document.querySelector('input');
+						inputElem.focus();
+						inputElem.parentNode.classList.add('mui-active'); //第一个是search，加上激活样式
+					}, 200);
+				};
+				mui.plusReady(function() {
+					initNativeObjects();
+					showSoftInput();
+				});
+			</script>

@@ -1,0 +1,154 @@
+ <include file="Index:header" />
+
+		<div class="mui-content" style="padding-bottom: 55px;">
+			<div id="slider" class="mui-slider">
+				<div class="mui-content-padded" style="margin: 5px;">
+				<div class="mui-input-row mui-search">
+					<input type="search" id="search" class="mui-input-clear" placeholder="请输入小区名称">
+				</div>
+
+			</div>
+			<div id="segmentedControl"  style="border:#e6e6e6 solid 1px;; background: #ebebeb; color: #6641E2;">
+				<if condition = "$tag eq 2">
+				<a  data-name="area" href="javascript:;">建面<span class="mui-icon mui-icon-arrowdown"></span></a>
+				<a class="" data-name="sell_price" href="javascript:;">价格<span class="mui-icon mui-icon-arrowdown"></span></a>
+				<a class="" data-name="layout_id" href="javascript:;">户型<span class="mui-icon mui-icon-arrowdown"></span></a>
+				</if>
+				<if condition = "$tag eq 1">
+				<a  data-name="area" href="javascript:;">建面<span class="mui-icon mui-icon-arrowup"></span></a>
+				<a class="" data-name="average_price" href="javascript:;">均价<span class="mui-icon mui-icon-arrowdown"></span></a>
+				<a class="" data-name="give_time" href="javascript:;">交房时间<span class="mui-icon mui-icon-arrowdown"></span></a>
+				</if>
+				
+				<a class="" href="javascript:;">更多<span class="mui-icon mui-icon-arrowdown"></span></a>			
+			</div>
+			<div class="fitter">
+
+				<form id="fitter-form" class="mui-input-group">
+					<!--<input type="hidden" name="teg" value="{$data.tag}"  />-->
+					
+
+					<div class="mui-input-row zhaofang_label"><label>面积</label>
+						<select name="area_id" style="color: #929292;">
+							<option value="">请选择面积</option>
+							<volist name="area" id="vo">
+								<option value="{$vo.id}" <if condition="$row.area_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>朝向</label>
+						<select name="orientation_id" style="color: #929292;">
+							<option value="">请选择朝向</option>
+							<volist name="orientation" id="vo">
+								<option value="{$vo.id}" <if condition="$row.orientation_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>房龄</label>
+						<select name="age_id" style="color: #929292;">
+							<option value="">请选择房龄</option>
+							<volist name="age" id="vo">
+								<option value="{$vo.id}" <if condition="$row.age_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>楼层</label>
+						<select name="floor_id" style="color: #929292;">
+							<option value="">请选择楼层</option>
+							<volist name="floor" id="vo">
+								<option value="{$vo.id}" <if condition="$row.floor_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+					</div>
+
+					<div class="mui-input-row zhaofang_label"><label>来源</label>
+						<select name="from_id" style="color: #929292;">
+							<option value="">请选择房屋户型</option>
+							<volist name="from" id="vo">
+								<option value="{$vo.id}" <if condition="$row.from_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>类型</label>
+						<select name="type_id" style="color: #929292;">
+							<option value="">请选择房屋户型</option>
+							<volist name="type" id="vo">
+								<option value="{$vo.id}" <if condition="$row.type_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-input-row zhaofang_label"><label>产权</label>
+						<select name="property_id" style="color: #929292;">
+							<option value="">请选择产权</option>
+							<volist name="property" id="vo">
+								<option value="{$vo.id}" <if condition="$row.property_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>装修</label>
+						<select name="fitment_id" style="color: #929292;">
+							<option value="">请选择装修</option>
+							<volist name="fitment" id="vo">
+								<option value="{$vo.id}" <if condition="$row.fitment_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					
+					<div class="mui-input-row zhaofang_label"><label>特色</label>
+						<select name="nature_id" style="color: #929292;">
+							<option value="">请选择特色</option>
+							<volist name="nature" id="vo">
+								<option value="{$vo.id}" <if condition="$row.nature_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+							</volist>
+						</select>
+
+					</div>
+					<div class="mui-content-padded">
+							
+							<button type="button" id="fitterBtn" class="mui-btn mui-btn-primary mui-btn-block">搜索</button>
+							
+						</div>
+				</form>
+				
+			</div>
+			
+			
+			<div id="secondList" class="list">
+				<div data-type="Houses" data-prefix="house{$tag}"  class="contentlist mui-table-view"></div>
+				
+				<button class="addMore ">加载更多</button>
+			
+			</div>
+			<div class="padding1em mui-text-center">
+				<h6>广西蚁客科技有限公司版权所有</h6>
+			</div>
+		</div>
+		
+	  <include file="Index:nav" />
+	  <if condition = "$tag eq 2">
+	  <a href="{:U('User/editFouses',['id'=>'00','tag'=>2])}" id="release" class="button-link fr"> <span></span> 我要发布</a>
+	  </if>
+      <include file="Index:footer" />
+	
+	<script type="text/javascript">
+	   var 	ajaxListPage = "{:U('ajaxListPage')}",
+	   	   	showUrl=  "{:U('show',['id'=>'00'])}",
+	   	   	page = 1,
+	   	   	keyword = 1,
+	   	   	fitter = '',
+	   	   	order='sort',
+	   	   	sort='asc'
+	   	   	tag='{$tag}';
+	   
+	   
+	   
+	   </script>

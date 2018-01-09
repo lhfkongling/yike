@@ -1,0 +1,402 @@
+<include file="Index:header" />
+<div class="mui-content notpaddingbutton " style="padding:44px 0  0px;">
+
+
+<php>if($row['tag'] == 2) {</php>
+	
+
+		<div id="housetype" class="mui-slider top-slider ">
+			<div class="mui-slider-group ">
+	
+				<volist name="row.picture" id="vo">
+				<div class="mui-slider-item">
+					<div class="" >
+						<a href="javascript:;">
+							<img src="{$vo.url}">
+						</a>
+					</div>
+				</div>
+				</volist>
+	
+			</div>	
+		</div>	
+
+<php>}</php>
+<php>if($row['tag'] == 1) {</php>
+	<div id="slider" class="mui-slider " style="background-color: black;">
+		<div class="mui-slider-group mui-slider-loop">
+			<!-- 第一张 -->
+			<div class="mui-slider-item">
+				<div class="item-logo" >
+					<a href="javascript:;">
+						<img src="<php>echo end($row['picture'])['url']</php>">
+					</a>
+				</div>
+			</div>
+			
+			<volist name="row.picture" id="vo">
+			<div class="mui-slider-item">
+				<div class="item-logo" >
+					<a href="javascript:;">
+						<img src="{$vo.url}">
+					</a>
+				</div>
+			</div>
+			</volist>
+			
+			<div class="mui-slider-item">
+				<div class="item-logo" >
+					<a href="javascript:;">
+						<img src="<php>echo current($row['picture'])['url']</php>">
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="mui-slider-indicator">
+			<foreach name="row.picture" item="vo" key="k" >
+			<div class="mui-indicator <if condition="$k eq 0">mui-active</if>"></div>
+			</foreach>
+			
+		</div>
+	</div>
+<php>}</php>
+<style>.mui-content-padded p span { width: 5rem;  display: inline-block; margin: 0 0.5rem 0 0; } .mui-content-padded p a { display: inline-block; }</style>
+<php> if( $row[tag] == 1 ) { </php>
+
+	<div class="mui-content-padded">
+	
+		<h4>{$row.name}</h4>
+
+		<p style="color:#EC971F;"> 均价：{$row.average_price}元/㎡</p>
+		<p>建筑面积：{$row.area}</p>
+		<p>地址：	{$row.address}</p>
+		<p>交房时间：{$row.give_time}</p>
+		<p><span>报备电话：</span><span>{$row.linkman.0}</span><a href="tel:{$row.telephone.0}">{$row.telephone.0}</a>
+			<php> if( $row[telephone][1] != '' ) { </php>
+			<br/><span>{$row.linkman.1}</span><a href="tel:{$row.telephone.1}">{$row.telephone.1}</a>
+			<php>}</php>
+			<php> if( $row[telephone][2] != '' ) { </php>
+			<br/><span>{$row.linkman.2}</span><a href="tel:{$row.telephone.2}">{$row.telephone.2}</a>
+			<php>}</php>
+			<php> if( $row[telephone][3] != '' ) { </php>
+			<br/><span>{$row.linkman.3}</span><a href="tel:{$row.telephone.3}">{$row.telephone.3}</a>
+			<php>}</php>
+			<php> if( $row[telephone][4] != '' ) { </php>
+			<br/><span>{$row.linkman.4}</span><a href="tel:{$row.telephone.4}">{$row.telephone.4}</a>
+			<php>}</php>
+		</p>
+		<div class="mui-clearfix"></div>
+	
+	</div>
+	<php>}</php>
+	<php> if( $row[tag] == 2 ) { </php>
+	<div class="mui-content-padded second">
+
+		<h4>{$row.name}</h4>
+
+		<table width="100%">
+			<tr>
+				<th style="color:#F43838;">{$row.sell_price}万</th>
+				<th style="color:#F0AD4E;">{$row.layout_name}</th>
+				<th style="color:#F43838;">{$row.area}㎡</th>
+				<th style="color:#F0AD4E;">{$row.average_price}元/㎡</th>
+			</tr>
+			<tr>
+				<td>售价</td>
+				<td>房型</td>
+				<td>面积</td>
+				<td>均价</td>
+			</tr>
+
+		</table>
+
+		<p>地址：{$row.address} 发布时间：{$row.release_time|fDate=###}</p>
+		<p><span>报备电话：</span><span>{$row.linkman.0}</span><a href="tel:{$row.telephone.0}">{$row.telephone.0}</a></p>
+	</div>
+	
+	<php>}</php>
+
+</div>
+
+<php>if($row['tag'] == 1) {</php>
+
+<div class="content-box">
+
+	<h4 class="center-align">待售户型</h4>
+
+	<div id="housetype" class="mui-slider ">
+		<div class="mui-slider-group ">
+
+			<foreach name="row.housetype" key="key" item="v">
+				<div class="mui-slider-item">
+					<div class="">
+						<a href="{$v.url}" target="_blank"><img src="{$v.url}"></a>
+						<span class="fl">{$v.type}</span>
+						<span class="fr">{$v.area}㎡</span>
+					</div>
+				</div>
+			</foreach>
+
+		</div>
+	</div>
+</div>
+<php>}</php>
+
+<div class="content-box">
+
+	<h4 class="center-align">房源简介</h4>
+
+	<ul class="im">
+
+		<if condition="$row.floor_name neq ''" ><li><span>楼层</span><span>{$row.floor_name}</span> </li></if>
+		<if condition="$row.nature_name neq ''" ><li><span>特色</span><span>{$row.nature_name}</span> </li></if>
+		<if condition="$row.fitment_name neq ''" ><li><span>装修</span><span>{$row.fitment_name}</span> </li></if>
+		<if condition="$row.orientation_name neq ''" ><li><span>朝向</span><span>{$row.orientation_name}</span> </li></if>
+		<if condition="$row.property_name neq ''" ><li><span>产权</span><span>{$row.property_name}</span> </li></if>
+		<if condition="$row.type_name neq ''" ><li><span>类型</span><span>{$row.type_name}</span> </li></if>
+		<if condition="$row.area_name neq ''" ><li><span>面积</span><span>{$row.area_name}</span> </li></if>
+		<if condition="$row.age_name neq ''" ><li><span>房龄</span><span>{$row.age_name}</span> </li></if>
+
+	</ul>
+
+	<ul class="se mui-clearfix">
+		<volist name="row.secondary" id="vo">
+			<li><!--<span>{$vo.code} :</span>-->{$vo.val} </li>
+		</volist>
+	</ul>
+
+	&nbsp;
+</div>
+
+
+
+<div class="content-box">
+	<div class=" info-P">
+		{$row.perimeter_introduce}
+	<div>
+</div>
+
+<div class="content-box">
+	
+	
+
+	<h4 class="center-align" style="margin-bottom:  0.5rem;">周边地图</h4> 
+	<div style="width:100%;height:25rem;" id="dituContent"></div>
+	<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak={$baiduAK}"></script>-->
+	<script type="text/javascript">
+		/*
+		var _x = parseFloat('{$row.perimeter_map.0}');
+		var _y = parseFloat('{$row.perimeter_map.1}');
+		var _p = parseInt('{$row.perimeter_map.2}');
+		// 百度地图API功能
+		var map = new BMap.Map("dituContent");
+		var point = new BMap.Point(_x, _y);
+		map.centerAndZoom(point, _p);
+		
+		var marker = new BMap.Marker(new BMap.Point(_x, _y)); // 创建点
+		//marker.addEventListener("click",attribute);
+		map.addOverlay(marker);    //增加点
+	
+		function attribute(){
+			var p = marker.getPosition();  //获取marker的位置
+			alert("marker的位置是" + p.lng + "," + p.lat);    
+		}
+		*/
+	</script>
+			&nbsp;
+</div>
+
+<php>if($row[tag] == 2 ) { </php>
+	
+<div class="content-box">
+
+	<h4 class="center-align">房源推荐</h4>
+						
+	
+	<div id="best" class="mui-slider">
+		<div class="mui-slider-group mui-slider-loop">
+			
+			
+			<volist name="best" id="vo">
+				<div class="mui-slider-item">
+					<a href="{:U('show',['id'=>$vo[house_id]])}">
+						<img src="{$vo[picture][0][url]}">
+						<span class="fl">{$vo.name}</span>						
+						<span class="fr">面积：{$vo.area} ㎡</span>
+						<span class="fl">{$vo.layout_name}</span>
+						<span class="fr">{$vo.sell_price}万</span>
+						
+					</a>
+				</div>
+			</volist>
+
+		</div>
+		
+	</div>
+	
+
+</div>
+
+<php>}</php>
+
+<div class="padding1em mui-text-center">
+	<h6>广西蚁客科技有限公司版权所有</h6>
+</div>
+
+
+	<php>if($row[tag] == 1 ) { </php>
+	<!--报备电话	显示-->
+	<div id="mask">
+		<p><span>{$row.linkman.0}</span><a href="tel:{$row.telephone.0}">{$row.telephone.0}</a>
+			<php> if( $row[telephone][1] != '' ) { </php>
+			<br/><span>{$row.linkman.1}</span><a href="tel:{$row.telephone.1}">{$row.telephone.1}</a>
+			<php>}</php>
+			<php> if( $row[telephone][2] != '' ) { </php>
+			<br/><span>{$row.linkman.2}</span><a href="tel:{$row.telephone.2}">{$row.telephone.2}</a>
+			<php>}</php>
+			<php> if( $row[telephone][3] != '' ) { </php>
+			<br/><span>{$row.linkman.3}</span><a href="tel:{$row.telephone.3}">{$row.telephone.3}</a>
+			<php>}</php>
+			<php> if( $row[telephone][4] != '' ) { </php>
+			<br/><span>{$row.linkman.4}</span><a href="tel:{$row.telephone.4}">{$row.telephone.4}</a>
+			<php>}</php>
+		</p>	
+	</div>
+		
+	<nav id="nav" class="mui-bar mui-bar-tab">
+		<a id="defaultTab" class="mui-tab-item  mui-active" href="javascript:;" > 
+                <span class="mui-tab-label">报备</span> 
+            </a> 
+
+		<a class="mui-active" href="{:U('User/bespokeInfo',['id'=>$row['house_id']])}">
+			<span class="mui-tab-label">预约</span>
+		</a>
+
+	</nav>
+<php>}</php>
+
+<php> if($row[tag] == 2 ) { </php>
+	<nav id="nav" class="mui-bar mui-bar-tab">
+		<!--<a id="defaultTab" class="mui-tab-item " href="{:U('Index/index')}"> 
+                <span class="mui-tab-label">收藏</span> 
+            </a> -->
+
+		<a class="mui-active" href="tel:{$row.telephone.0}">
+			<span class="mui-tab-label">联系电话</span>
+		</a>
+
+	</nav>
+<php>}</php>
+
+<include file="Index:footer" />
+<script type="text/javascript">
+	var ajaxListPage = "{:U('ajaxListPage')}",
+		catid = '{$catid}',
+		artileUrl = "{:U('show',['id'=>'00'])}";
+		
+		/*
+	var imgUrl = "<php>echo current($row['picture'])['url']</php>";  // 分享后展示的一张图片
+   var lineLink = "{:U('show',['id'=>$row['house_id']])}"; // 点击分享后跳转的页面地址
+   var descContent = "{$row.brief}";  // 分享后的描述信息
+   var shareTitle = '{$row.name}';  // 分享后的标题 
+   var appid = '';  // 应用id,如果有可以填，没有就留空
+
+        function shareFriend() {
+
+            WeixinJSBridge.invoke('sendAppMessage',{
+
+                "appid": appid,
+
+                "img_url": imgUrl,
+
+                "img_width": "200",
+
+                "img_height": "200",
+
+                "link": lineLink,
+
+                "desc": descContent,
+
+                "title": shareTitle
+
+            }, function(res) {
+
+          //_report('send_msg', res.err_msg);  // 这是回调函数，必须注释掉
+
+            })
+
+        }
+
+        function shareTimeline() {
+
+            WeixinJSBridge.invoke('shareTimeline',{
+
+                "img_url": imgUrl,
+
+                "img_width": "200",
+
+                "img_height": "200",
+
+                "link": lineLink,
+
+                "desc": descContent,
+
+                "title": shareTitle
+
+            }, function(res) {
+
+         //_report('timeline', res.err_msg); // 这是回调函数，必须注释掉
+
+            });
+
+        }
+
+        function shareWeibo() {
+
+            WeixinJSBridge.invoke('shareWeibo',{
+
+                "content": descContent,
+
+                "url": lineLink,
+
+            }, function(res) {
+
+                //_report('weibo', res.err_msg);
+
+            });
+
+        }
+
+   // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+
+   document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+
+            // 发送给好友
+
+            WeixinJSBridge.on('menu:share:appmessage', function(argv){
+
+                shareFriend();
+
+            });
+
+            // 分享到朋友圈
+
+            WeixinJSBridge.on('menu:share:timeline', function(argv){
+
+                shareTimeline();
+
+            });
+
+            // 分享到微博
+
+            WeixinJSBridge.on('menu:share:weibo', function(argv){
+
+                shareWeibo();
+
+            });
+
+        }, false);
+        */
+		
+</script>

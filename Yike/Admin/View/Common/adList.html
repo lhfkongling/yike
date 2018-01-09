@@ -1,0 +1,53 @@
+<include file="Index/header" />
+
+<script>
+var updateUrl = '{:U("updateField")}';
+</script>
+
+
+<div class="header"><span></span>广告</div>
+<div class="h6bg"></div>
+<div class="content">
+
+<form action="" class="sourch" method="post" > <!--onsubmit="return sourchTagList()"-->
+	<a class="fr" href="{:U('adEdit')}">+ 新增广告</a>
+    <input type="text" name="ad_name" class="text" value="{$data.ad_name}"  placeholder="广告名称">
+    <input type="submit" class="subBtn" value="搜&nbsp;&nbsp;索">
+    <input type="hidden" name="order" value="{$data.order}"/>
+    <input type="hidden" name="sort" value="{$data.sort}"/>
+</form>
+
+<table cellpadding="0" cellspacing="0" class="tableList">
+<tr>
+	<th width="30"><input type="checkbox" class="all"></th>
+	<th width="70">广告ID <i><a class="asc" title="升序" href="{:U('adList',['ad_name'=>$data['ad_name'],'order'=>'ad_id','sort'=>'asc'])}"></a> <a class="desc" title="降序"  href="{:U('adList',['ad_name'=>$data['ad_name'],'order'=>'ad_id','sort'=>'desc'])}"></a></i></th>
+    <th width="150">广告名称</th>
+    <th width="100">标识符</th>
+    <th width="100">上下架</th>
+  
+    <th width="150">操作</th>
+</tr>
+<volist name="list" id="vo">
+<tr id="id{$vo.ad_id}">
+	<td><input type="checkbox" class="id" value="{$vo.ad_id}"></td>
+	<td>{$vo.ad_id}</td>
+    <td>{$vo.ad_name}</td>
+    <td>{$vo.code}</td>
+     <td><switch name="vo.is_show">
+    <case value="0"><img src="__PUBLIC__/Admin/images/no.png" class="boole"></case>
+    <case value="1"><img src="__PUBLIC__/Admin/images/yes.png"  class="boole"></case>
+    <defalut />错误参数
+    </switch></td>
+    
+  
+    <td><a href="{:U('adEdit',['id'=>$vo['ad_id']])}">修改</a><a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('adDelete',['ad_name'=>$data['ad_name'],'p'=>$data['p'],'order'=>'ad_id','sort'=>'asc','id'=>$vo['ad_id']])}';}">删除</a> </td>
+</tr>
+</volist>
+
+<tr>
+<th colspan="9">{$page}</th>
+</tr>
+
+</table>
+</div>
+<include file="Index/footer" />

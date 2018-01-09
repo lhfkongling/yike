@@ -1,0 +1,86 @@
+<include file="Index/header" />
+
+<script>
+  var updateUrl = '{:U("updateField")}';
+  var imagesCount = 0;
+  </script>
+
+<div class="header"><span></span>系统配置
+<font> 系统配置列表  &gt; 修改系统配置 </font>
+
+</div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit "  onsubmit="return checkAppEdit(this)">
+  
+  	  
+    <ul class="field">
+      <li><span>网站名称</span>
+        <input type="text" name="web_name"  class="width500"  placeholder="请输入网站名称" value="{$row.web_name}">
+      </li>
+
+       
+       <li><span>网站标题</span>
+        <input type="text" name="title"  class="width500" placeholder="请输入网站标题" value="{$row.title}">
+       </li>
+      
+      <li><span>前台图片上传截取尺寸</span>
+        <input type="text" name="img_size"  class="width500"  placeholder="请输入宽,高 " value="{$row[img_size]}">
+        	备注：请输入数字，宽高使用英文逗号隔开如  (宽,高  : 500,350)
+       </li>
+       
+       <li><span>版本号</span>
+        <input type="text" name="version"  class="width500"  placeholder="请输入版本号" value="{$row[version]}">
+       </li>
+       
+       <li><span>默认审核状态</span>
+        <label> <input type="radio" name="status" 
+            
+            <if condition="$row[status] eq '1'"> checked="checked" </if>
+            value="1"> 已审核</label>
+        <label> <input type="radio" name="status" 
+            
+            <if condition="$row[status] eq '0'"> checked="checked" </if>
+            value="0">未审核</label>
+       
+      </li>
+       <li><span>启用后台登录验证码</span>
+        <label> <input type="radio" name="admincode" 
+            
+            <if condition="$row[admincode] eq '1'"> checked="checked" </if>
+            value="1"> <img src="/Public/Admin/images/yes.png"  class="boole"></label>
+        <label> <input type="radio" name="admincode" 
+            
+            <if condition="$row[admincode] eq '0'"> checked="checked" </if>
+            value="0"><img src="/Public/Admin/images/no.png" class="boole"></label>
+       
+      </li>
+      
+       
+            <li><span>百度AK</span>
+        <input type="text" name="baiduak" class="width500" placeholder="请输入百度AK" value="{$row.baiduak}">
+       </li>
+        
+      
+            <li><span>关键字</span>
+        <input type="text" name="keyword" class="width500" placeholder="请输入关键字" value="{$row.keyword}">
+       </li>
+        
+      <li class="brief"><span>会员公告</span>
+        <textarea name="note" placeholder="请输入网站描述">{$row.note}</textarea>
+      </li>
+    
+    </ul>
+  
+    
+    
+  
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+    </div>
+  </form>
+  </span> </div>
+
+<include file="Index/footer" />

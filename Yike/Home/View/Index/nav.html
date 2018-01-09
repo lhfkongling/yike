@@ -1,0 +1,21 @@
+        
+        <nav id="nav" class="mui-bar mui-bar-tab"> 
+            <a class="<php>if(CONTROLLER_NAME == 'Index' ) echo 'mui-active';</php>" href="{:U('Index/index')}"> 
+                <span class="mui-icon mui-icon-home"></span> 
+                <span class="mui-tab-label">首页</span> 
+            </a> 
+            
+            <a  class="<php>if(CONTROLLER_NAME == 'User'and ( ACTION_NAME == 'bespoke' or ACTION_NAME == 'bespokeInfo'   )  ) echo 'mui-active';</php>" href="{:U('User/bespoke')}"> 
+                <span class="mui-icon mui-icon-bars">
+                <span class="mui-badge"><if condition="session('user.type') eq 2">{:getBespokeCount(2)} <else /> {:getBespokeCount(1)} </if> </span>
+                </span> 
+                <span class="mui-tab-label"><if condition="session('user.type') eq 2">预约列表 <else /> 日程 </if></span> 
+            </a> 
+            
+            <a class="<php>if(CONTROLLER_NAME == 'User'and ( ACTION_NAME != 'bespoke' and  ACTION_NAME != 'bespokeInfo'   )  ) echo 'mui-active';</php>" href="{:U('User/index')}" > 
+                <span class="mui-icon mui-icon-contact"></span> 
+                <span class="mui-tab-label">我的</span> 
+            </a> 
+            
+            
+        </nav>

@@ -1,0 +1,102 @@
+@charset "UTF-8";
+/*弹出层*/
+.c-float-popWrap.show{ display:block;}
+.c-float-popWrap.hide{ display:none;}
+
+/*竖屏*/
+@media screen and (orientation: portrait){
+.c-float-popWrap{top:0 !important; left:0 !important; }	
+.c-float-modePop{top:4rem;}
+	}
+/*横屏*/
+@media screen and (orientation: landscape) {
+.c-float-popWrap{top:0 !important; left:0 !important; }	
+.c-float-modePop{top:2rem;}
+}
+
+.c-float-popWrap{width: 100%;z-index: 99999; position: fixed;border-radius: 3px;overflow: hidden; height:100%;background: rgba(0, 0, 0, 0.6);}
+.weui_mask_transparent{position: fixed;z-index: -1;width: 100%;height: 100%;top: 0 !important;left: 0 !important; overflow:hidden;}
+
+.c-float-modePop{ position:relative; border-radius: 6px;text-align: center; background-color: #fff; width:80%; position:fixed;  left:10%;}
+.c-float-modePop .warnMsg{ display:none;}
+.c-float-popWrap .c-float-modePop .content{ width:95%; margin:0.6rem auto 0.36rem; color: #000;
+text-align: left;}
+.c-float-popWrap .c-float-modePop .content span{ display:block;font-size: 0.34rem; font-weight:bold; font-family:"Helvetica";}
+
+
+
+.c-float-popWrap.confirmMode .c-float-modePop .content, .c-float-popWrap.confirmMode .c-float-modePop .doBtn{ display:block;}
+.c-float-popWrap .c-float-modePop .doBtn{width: 100%; position: relative; overflow:hidden;}
+.c-float-popWrap .c-float-modePop .doBtn:after { content: ''; position: absolute;left: 0; top: 0;width: 100%;height: 1px; border-top: 1px solid #D5D5D6;  
+color: #D5D5D6; -webkit-transform-origin: 0 0; transform-origin: 0 0;-webkit-transform: scaleY(0.5); transform: scaleY(0.5);}
+
+
+
+
+.c-float-popWrap .c-float-modePop button.cancel{position: relative;border-right:1px solid #D5D5D6;
+border-radius:0 0 0 6px; -webkit-border-radius:0 0 0 6px; --moz-border-radius:0 0 0 6px; }
+
+.c-float-popWrap .c-float-modePop button{width: 50%; height: 0.8rem;line-height: 0.8rem;color: #0277ff;font-size: 0.34rem; border: 0;
+ padding: 0; text-align:center; color:#4192d8; background:#fff;}
+.c-float-popWrap .c-float-modePop button.ok{color: #4aa0fd; width:50%;
+border-radius:0 0 6px 0;-webkit-border-radius:0 0 6px 0; -moz-border-radius:0 0 6px 0;font-weight:bold;}
+
+.c-float-popWrap .c-float-modePop button:active{ background:#e3e3e3; border:none;}
+
+
+
+/*关闭按钮*/
+.c-float-modePop .pop_close{ width:0.4rem; height:0.4rem; position:absolute; top:-0.5rem; right:-0.5rem;background: url(../images/2016110813.png) no-repeat;background-size:contain; cursor:pointer;}
+.c-float-modePop .content{ text-align:center !important;}
+.c-float-modePop .content img{ width:1rem; height:1rem; overflow:hidden; vertical-align:middle;}
+.c-float-modePop .content span{ display:block; text-align:center;}
+
+
+
+.c-float-modePop .warnMsg{ text-align:center; font-size:0.34rem; height:0.8rem; line-height:0.8rem; color:#000; border-bottom:2px solid #dedede;}
+
+
+
+
+
+.cx_mask_transparent{
+	position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.web_toast{
+    position: fixed;
+	margin: 0 10px;
+    z-index: 9999;
+    display: none;
+    display: block;
+    padding: 10px;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.7);
+    font-size: 1.0rem;
+    text-align: center;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

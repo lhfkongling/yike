@@ -1,0 +1,82 @@
+<include file="Index/header" />
+
+<div class="header"><span></span> 预约
+
+	<font>
+		<if condition="$row.ub_id gt 0">修改
+			<else/>新增</if>
+	</font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+	<form action="" method="post" class="tableEdit">
+		<ul class="field">
+			<li class="mui-input-row">
+				<span>房源名称</span>{$row.build_name}			
+			</li>
+			<li class="mui-input-row">
+				<span>房源地址</span>{$row.address}			
+			</li>
+			
+			<li class="mui-input-row">
+				<span>蚁客名称</span>{$row.userYk}&nbsp;			
+			</li>
+			<li class="mui-input-row">
+				<span>蚁客编码</span>{$row.uuid}	&nbsp;		
+			</li>
+			
+			
+			<li class="mui-input-row">
+				<span>客户姓名</span>
+				<input type="text" name="name" value="{$row.name}" class="mui-input-clear" placeholder="请输入客户姓名">
+			</li>
+			<li class="mui-input-row">
+				<span>联系电话</span>
+				<input type="text" name="telephone" value="{$row.telephone}" class="mui-input-clear" placeholder="请输入联系电话">
+			</li>
+
+			<li class="mui-input-row">
+				<span>随行人数</span>
+				<input type="number" name="number" value="{$row.number}" class="mui-input-clear" placeholder="请输入随行人数">
+			</li>
+			<li class="mui-input-row">
+				<span>看房时间</span>
+				<input type="text" name="see_time" value="{$row.see_time}" id="seetime" data-options='{"type":"hour","spans":["年", "月", "日", "时段", "分"]}' class="mui-input-clear" placeholder="选择看房时间">
+			</li>
+
+			<li class="mui-input-row" style="height: auto;">
+				<span>进度</span>
+
+				<select name="agree" style="color: #929292 " ;>
+					<option value="-1" <if condition="$row[agree] eq '-1'">selected="selected" </if> >预约失败</option>
+					<option value="0" <if condition="$row[agree] eq '0'"> selected="selected" </if> >已提交</option>
+					<option value="1" <if condition="$row[agree] eq '1'"> selected="selected" </if> >预约成功</option>
+					<option value="2" <if condition="$row[agree] eq '2'"> selected="selected" </if> >交订</option>
+					<option value="3" <if condition="$row[agree] eq '3'"> selected="selected" </if> >付首付</option>
+					<option value="4" <if condition="$row[agree] eq '4'"> selected="selected" </if> >按揭中</option>
+					<option value="5" <if condition="$row[agree] eq '5'"> selected="selected" </if> >放款</option>
+				</select>
+
+			</li>
+			<li class="mui-input-row" style="height: auto;">
+				<span>备注</span>
+
+				<textarea name="note">{$row.note}</textarea>
+
+			</li>
+
+		</ul>
+
+		<div class="clear" style="height:2px;"></div>
+		<div class="btn ">
+			<a href="javascript:history.back();">取消</a>
+			<input type="submit" class="sub" value="保存" />
+			<input type="hidden" name="ub_id" value="{$row.ub_id}">
+			<input type="hidden" name="builduser_id" value="{$row.builduser_id}">
+			<input type="hidden" name="user_id" value="{$row.user_id}">
+		</div>
+	</form>
+	</span>
+</div>
+
+<include file="Index/footer" />

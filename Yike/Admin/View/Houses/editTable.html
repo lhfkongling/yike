@@ -1,0 +1,47 @@
+<include file="Index/header" />
+
+
+<div class="header"><span></span>
+	<switch name="table">
+		<case value="floor">楼层</case>
+		<case value="layout">户型</case>
+		<case value="region">区域</case>
+		<case value="nature">特色</case>
+		<case value="fitment">装修</case>
+		<case value="orientation">朝向</case>
+		<case value="property">产权</case>
+		<case value="type">类型</case>
+		<case value="from">来源</case>
+		<case value="area">面积</case>
+		<case value="age">房龄</case>
+	</switch>
+	
+<font>  <if condition="$row.id gt 0">修改<else/>新增</if> </font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit">
+    <ul class="field">
+      <li><span><i>*</i>名称</span>
+        <input type="text" name="{$table}_name" id="{$table}_name" class="checkName" data-type="tags" data-tip="楼层名称已经在，请重新填写" placeholder="请输入楼层名称" value="{$row.name}"> <font class="tip">楼层名称已经在，请重新填写</font>
+      </li>
+      
+      <li><span>楼层排序</span>
+        <input type="text" name="sort" placeholder="请输入楼层排序" value="{$row.sort}">
+      <br/>  类别排序以数字越大顺序越优先（如：100 > 默认 > 1）</li>
+     
+     
+    </ul>
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+      <input type="hidden" name="{$table}_id" value="{$row.id}">
+      <input type="hidden" name="table" value="{$table}">
+    </div>
+  </form>
+  </span> </div>
+
+
+
+<include file="Index/footer" />

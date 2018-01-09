@@ -1,0 +1,55 @@
+    </div>
+        <div class="footer">Coperight @2017-2018 木炭信息平台 版权所有</div>
+</div>
+
+<div id="embed">
+	
+</div>
+<script>
+	var _public = '__PUBLIC__';
+	var checkNewBespoke = "{:U('Bespoke/checkNewBespoke')}";
+	var  promptText = '您有新的预约信息，请注意查收<a href="{:U('Bespoke/listBespoke')}">查看预约信息</a>' ;
+	var  userText = '您有新的蚁客会员注册，请注意查收<a href="{:U('User/userList')}">查看会员信息</a>' ;
+	$(function(){
+	
+		//订单预约提示
+		var prompt = new Audio("/uploads/prompt.m4a");
+		
+		var user = new Audio("/uploads/user.m4a");		
+		
+		
+		var check_bespoke = function (){ 
+			ajaxobj(checkNewBespoke,{},responseCheckNewBespoke);
+		}
+		
+		var  close_embed = function (){
+			$('#embed').hide('slow') ;
+		}
+		
+		var responseCheckNewBespoke = function (data){
+			if(data.type == 'prompt' ){
+				if(data.number > 0){
+					prompt.play();
+					$('#embed').html(promptText);
+					$('#embed').show('slow') ;
+					setTimeout(close_embed, 10000) ;
+				}
+			}
+			if(data.type == 'user' ){
+				if(data.number > 0){
+					user.play();
+					$('#embed').html(userText);
+					$('#embed').show('slow') ;
+					setTimeout(close_embed, 10000) ;
+				}
+			}
+		}
+		
+		setInterval(check_bespoke,30000) ;
+		
+	 })
+
+</script>
+</div>
+</body>
+</html>

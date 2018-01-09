@@ -1,0 +1,376 @@
+<include file="Index:header" />
+<div class="mui-content">
+	 
+	
+	<form action="" method="post" id="updateFile" class="mui-input-group">
+
+		<ul class="ul-block">
+			<li class="mui-input-row">
+				<label>房源名称</label>
+				<input type="text" name="name" value="{$row.name}" class="mui-input-clear" placeholder="请输入楼盘名称">
+			</li>
+			<li class="mui-input-row">
+				<label>建面</label>
+				<span class="unit">㎡</span>
+				<input type="number" name="area" id="area" value="{$row.area}" class="mui-input-clear" placeholder="请输入建设面积">
+			</li>
+			<li class="mui-input-row">
+				<label>地址</label>
+				<input type="text" name="address" value="{$row.address}" class="mui-input-clear" placeholder="请输入楼盘所在地址">
+			</li>
+			
+			
+			<if condition="$row.tag eq 2">
+				<li class="mui-input-row"><label>售价</label>
+					<span class="unit">万</span>
+					<input type="number" name="sell_price" id="sell_price" placeholder="请输入售价" value="{$row.sell_price}">
+				</li>
+
+				<li class="mui-input-row"><label>单价</label>
+					<span class="unit">元/㎡</span>
+					<input type="number" name="average_price" id="average_price" placeholder="请输入单价" value="{$row.average_price}"> 
+				</li>
+
+				<li class="mui-input-row"><label>户型</label>
+					<select name="layout_id">
+						<option value="">请选择房屋户型</option>
+						<volist name="layout" id="vo">
+							<option value="{$vo.id}" <if condition="$row.layout_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+			</volist>
+			</select>
+
+			</li>
+
+			</if>
+			
+			<if condition="$row.tag eq 1">
+				<li class="mui-input-row"><label>均价</label>
+					<span class="unit">元/㎡</span>
+					<input type="number" name="average_price" id="average_price" placeholder="请输入均价" value="{$row.average_price}">
+				</li>
+
+				<li class="mui-input-row"><label>特价</label>
+					<span class="unit">元/㎡</span>
+					<input type="text" name="bargain_price" id="bargain_price" placeholder="请输入特价" value="{$row.bargain_price}"> 
+				</li>
+
+				<li class="mui-input-row"><label>交房时间</label>
+					<input type="text" name="give_time" id="give_time"  data-options='{"type":"hour","labels":["年", "月", "日", "时段", "分"]}'  placeholder="请选择交房时间" value="{$row.give_time}">
+				</li>
+			</if>
+
+
+			<li class="mui-input-row"><label>楼层</label>
+				<select name="floor_id">
+					<option value="">请选择楼层</option>
+					<volist name="floor" id="vo">
+						<option value="{$vo.id}" <if condition="$row.floor_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+			</li>
+
+			<li class="mui-input-row"><label>特色</label>
+				<select name="nature_id">
+					<option value="">请选择特色</option>
+					<volist name="nature" id="vo">
+						<option value="{$vo.id}" <if condition="$row.nature_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>装修</label>
+				<select name="fitment_id">
+					<option value="">请选择装修</option>
+					<volist name="fitment" id="vo">
+						<option value="{$vo.id}" <if condition="$row.fitment_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>朝向</label>
+				<select name="orientation_id">
+					<option value="">请选择朝向</option>
+					<volist name="orientation" id="vo">
+						<option value="{$vo.id}" <if condition="$row.orientation_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>产权</label>
+				<select name="property_id">
+					<option value="">请选择产权</option>
+					<volist name="property" id="vo">
+						<option value="{$vo.id}" <if condition="$row.property_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>类型</label>
+				<select name="type_id">
+					<option value="">请选择房屋户型</option>
+					<volist name="type" id="vo">
+						<option value="{$vo.id}" <if condition="$row.type_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>来源</label>
+				<select name="from_id">
+					<option value="">请选择房屋户型</option>
+					<volist name="from" id="vo">
+						<option value="{$vo.id}" <if condition="$row.from_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+
+			<li class="mui-input-row"><label>面积</label>
+				<select name="area_id">
+					<option value="">请选择面积</option>
+					<volist name="area" id="vo">
+						<option value="{$vo.id}" <if condition="$row.area_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+			<li class="mui-input-row"><label>房龄</label>
+				<select name="age_id">
+					<option value="">请选择房龄</option>
+					<volist name="age" id="vo">
+						<option value="{$vo.id}" <if condition="$row.age_id eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+					</volist>
+				</select>
+
+			</li>
+
+			<li></li>
+
+		</ul>
+		<if condition="$row.tag eq 2">
+		<ul class="ul-block" id="picture">
+			<li class="mui-input-row" id="second">
+				<label>楼盘图片</label>
+				<input type="file" style="display: block;"  id="newAdd"  accept="image/*" multiple />
+	        
+				<volist name="row.picture" id="vo">
+				<b>
+					<img class="upImg" id="old{$vo.picture_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>">
+					<input type="hidden" name="picture[]" class="pichidden" value="{$vo.url}" />
+					<input type="hidden" name="picture_id[]" value="{$vo.picture_id}" />
+				 	<em>删除</em>
+	         	</b>
+				</volist>
+				
+			</li>
+			<li></li>
+		</ul>
+		</if>
+		<if condition="$row.tag eq 1">
+		<ul class="ul-block" id="picture">
+			<li class="mui-input-row img">
+				<label>楼盘图片</label>
+				<volist name="row.picture" id="vo">
+					<b>
+					<img class="upImg" id="old{$vo.picture_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>">
+					<input type="hidden" name="picture[]" class="pichidden" value="{$vo.url}" />
+					<input type="hidden" name="picture_id[]" value="{$vo.picture_id}" />
+					<em>删除</em>
+	         	</b>
+				</volist>
+				<for start="0" end="$pic_num">
+				<b>
+					<img class="upImg" id="new{$i}" src="__PUBLIC__/Home/images/add.png">
+					<input type="hidden" name="picture[]" class="pichidden" value="" />
+					<em>删除</em>
+	         	</b>
+				</for>
+
+			</li>
+			<li></li>
+		</ul>
+		<ul class="ul-block housetype img" id="house_type">
+			<li class="mui-input-row">
+				<label>在售户型</label>
+				<font data-type="housetype" class="add">添加户型</font>
+			</li>
+			<volist name="row.housetype" id="vo">
+				<li class="mui-input-row ">
+					<label class="input">
+							<img id="type{$vo.type_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>" >
+            				<input type="hidden" name="housetype[url][]" class="pichidden"  value="{$vo.url}" />
+						</label>
+					<font data-id="{$vo.type_id}" data-type="house_type" class="del">-</font>
+					<input type="hidden" name="housetype[type_id][]" value="{$vo.type_id}" />
+					<input type="hidden" name="housetype[build_id][]" value="{$row.build_id}" />
+					<input type="text" name="housetype[type][]" value="{$vo.type}" />
+					<input type="text" name="housetype[area][]" value="{$vo.area}" />户型：<br/>面积：
+
+				</li>
+			</volist>
+
+			<li></li>
+
+		</ul>
+
+		</if>
+
+		<ul class="ul-block important">
+			<li class="mui-input-row">
+				<label>自定义标签</label>
+				<font data-type="secondary" class="add">添加标签</font>
+			</li>
+			<volist name="row.secondary" id="vo">
+				<li class="mui-input-row ">
+					
+					<input type="text" name="secondary[val][]" value="{$vo.val}" class="mui-input-clear" placeholder="请输入标签">
+					<input type="hidden" name="secondary[house_id][]" value="{$row.house_id}" />
+					<input type="hidden" name="secondary[tag][]" value="1" />
+					<input type="hidden" name="secondary[se_id][]" value="{$vo.se_id}" />
+					<font data-id="{$vo.se_id}" data-type="secondary" class="del">-</font>
+				</li>
+			</volist>
+			<li></li>
+		</ul>
+
+		<ul class="ul-block">
+
+			<li class="mui-input-row">
+				<label>周边地图</label>
+				<input type="text" name="perimeter_map" value="" readonly="" class="mui-input-clear" placeholder="请联系客服添加地图">
+
+			</li>
+			<li class="mui-input-row">
+				<label>周边介绍</label>
+				<input type="text" name="perimeter_introduce" value="{$row.perimeter_introduce}" class="mui-input-clear" placeholder="请输入周边介绍">
+
+			</li>
+			<!--<li class="mui-input-row">
+				<label>楼盘简介</label>
+				<input type="text" name="brief" value="{$row.brief}" class="mui-input-clear" placeholder="请输入楼盘简介">
+
+			</li>-->
+			<li></li>
+		</ul>
+
+		<ul class="ul-block">
+
+			<li class="mui-input-row">
+				<label>联系人</label>
+				<input type="text" name="linkman[]" value="{$row.linkman.0}" class="mui-input-clear" placeholder="请输入联系人">
+
+			</li>
+
+			<li class="mui-input-row">
+				<label>联系电话</label>
+				<input type="number" name="telephone[]" value="{$row.telephone.0}" class="mui-input-clear" placeholder="请输入联系电话">
+
+			</li>
+
+			<li>
+				<if condition = "$row.tag eq 1">
+		         <input type="hidden" name="linkman[]"   value="{$row.linkman.1}">       
+		         <input type="hidden" name="telephone[]" value="{$row.telephone.1}"><br/>
+		         <input type="hidden" name="linkman[]"   value="{$row.linkman.2}">       
+		         <input type="hidden" name="telephone[]" value="{$row.telephone.2}"><br/>
+		         <input type="hidden" name="linkman[]"   value="{$row.linkman.3}">       
+		         <input type="hidden" name="telephone[]" value="{$row.telephone.3}"><br/>
+		         <input type="hidden" name="linkman[]"   value="{$row.linkman.4}">       
+		         <input type="hidden" name="telephone[]" value="{$row.telephone.4}"><br/>
+		        </if>
+				
+			</li>
+		</ul>
+
+
+
+		<ul class="ul-block">
+			<li class="btn">
+				<input type="hidden" name="user_id" value="{$Think.session.user.user_id}" />
+				<input type="hidden" name="house_id" value="{$row.house_id}" />
+				<button type="submit" class="mui-btn-primary mui-btn-block">提 交</button>
+
+			</li>
+			<li></li>
+		</ul>
+	</form>
+</div>
+
+<include file="Index:footer" />
+<include file="Houses:upbase64Image" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/app.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.picker.min.css" />
+<script src="__PUBLIC__/Home/js/mui.picker.min.js"></script>
+<script>
+	var updateUrl = '{:U("updateField")}',
+		checkRepeatName = '{:U("checkRepeatName")}',
+		deleteAttr = '{:U("deleteAttr")}',
+		imagesDelete = '{:U("imagesDelete")}', //删除图片路径
+		imagesCount = '{$row.imgCount}',
+		house_id = '{$row.house_id}',
+		tag = '{$row.tag}';
+		
+	//时间选择
+	(function($) {				
+		var result = $('#give_time');
+		var btns = $('#give_time');
+		btns.each(function(i, btn) {
+			btn.addEventListener('tap', function() {
+				var optionsJson = this.getAttribute('data-options') || '{}';
+				var options = JSON.parse(optionsJson);
+				var id = this.getAttribute('id');
+				var picker = new $.DtPicker(options);
+				
+				picker.show(function(rs) {
+				
+					document.getElementById('give_time').value= rs.text ;
+					
+					picker.dispose();
+				});
+			}, false);
+		});
+	})(mui);
+</script>
+ <if condition = "$row.tag eq 2">
+    <script type="application/x-javascript" src="__PUBLIC__/Common/js/ajaxNative.js"></script>
+      <script>
+	/**
+	 * 二手房批量上传图片
+	 * 
+	 * */
+	updateSecondPic= '{:U("updateSecondPic")}', //上传图片路径
+	$('#newAdd').bind('change',function(e){
+		
+		console.log(this.files);
+		
+		var files =this.files;
+		var formData = new FormData();
+		
+		for(var i = 0  ; i< files.length ; i++){
+			console.log(files[i]);
+			var index1=files[i].name.lastIndexOf(".");
+			var index2=files[i].name.length;
+			var suffix=files[i].name.substring(index1+1,index2);//后缀名
+			formData.append("file"+i,files[i]); //包装文件
+			formData.append("suffix"+i,suffix);//包装后缀名
+			
+		}
+		formData.append("rename",1); //重命名 1为重名，0为使用原来的名称
+		
+		ajaxNative(formData,updateSecondPic , responseUpdateSecondPic) ;
+	})
+	
+	function responseUpdateSecondPic (data){
+		
+		if(data.error > 0){
+			webToast(data.info,"middle",6000);
+		}else{
+			$.each(data.up, function(k , v) {
+				console.log(k,v);
+				$('#second').append( '<b><img  src="'+v+'" ><input type="hidden" name="picture[]" class="pichidden"  value="'+v+'" /><em>删除</em></b>' ) ;
+			});
+		}
+		console.log(data);
+	}
+
+  </script>
+   </if>

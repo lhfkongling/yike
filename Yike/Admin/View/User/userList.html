@@ -1,0 +1,121 @@
+<include file="Index:header" />
+<script>
+var updateUrl = '{:U("updateActorField")}';
+</script>
+
+<div class="header"><span></span>用户
+<font><if condition="$data.type eq 3">付费会员<else/>注册用户</if>  &gt; 列表</font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+	
+	<form action="" class="sourch" id="userSearch" method="post" >
+		<!--<a class="fr" href="{:U('usersEdit')}">+ 新增用户</a>-->
+	    <strong>信息筛选：</strong>
+	      昵称： <input type="text" name="name" class="text" value="{$data.name}"  placeholder="输入用户昵称">
+	       审核认证：
+	   <select name="authentication" class="text">
+       	 	<option value=""> 请选择</option>         
+            <option value="-1" <if condition="$data[authentication] eq '-1'"> selected="selected" </if>>认证失败</option>
+            <option value="0" <if condition="$data[authentication] eq '0'"> selected="selected" </if>>未认证</option>
+            <option value="1" <if condition="$data[authentication] eq '1'"> selected="selected" </if>>审核中</option>
+            <option value="2" <if condition="$data[authentication] eq '2'"> selected="selected" </if>>认证成功</option>           
+          </select>
+
+	   用户类型：
+	   <select name="type" class="text">
+	   	<option value="">请选择</option>
+	  	  <option value="0" <if condition="$data[type] eq '0'"> selected="selected" </if>> 注册会员</option>
+          <option value="1" <if condition="$data[type] eq '1'"> selected="selected" </if>> 蚁客</option>
+          <option value="2" <if condition="$data[type] eq '2'"> selected="selected" </if>> 开发商</option>          
+	   </select>
+	   
+	   
+	    <input type="submit" class="subBtn" value="搜&nbsp;&nbsp;索">
+	    <input type="hidden" name="order" value="{$data.order}"/>
+	    <input type="hidden" name="sort" value="{$data.sort}"/>
+	</form>
+		
+	<table cellpadding="0" cellspacing="0" class="tableList">
+		<tr>
+			<th width="30"><input type="checkbox" class="all"></th>
+			<th width="70"> <if condition="$data.type eq 3">会员<else/>用户</if>ID </th>
+		    <th width="100">头像</th>
+		    <th width="150">名称</th>
+		    <th width="150">昵称</th>
+		    <th width="100">审核状态</th>
+		    <th width="70">用户类型</th>
+		    <th width="70">父级名称</th>
+		    <th width="100">电话</th>
+		     <th width="100">工作证号</th>
+		    
+		    <th width="150">操作</th>
+		</tr>
+		<volist name="list" id="vo">
+		<tr id="id{$vo.user_id}">
+			<td><input type="checkbox" class="id" value="{$vo.user_id}"></td>
+			<td>{$vo.user_id}</td>
+		     <td><img src="<if condition="$vo.face_url neq ''">{$vo.face_url}<else/>/Public/Admin/images/default_goods.png</if>" width="50"></td> 
+		    <td>{$vo.name}</td>
+		    <td>{$vo.nickname}</td>
+		    <td>
+			    <switch name="vo.authentication"> 
+				    <case value="-1">认证失败</case>
+				    <case value="1">审核中</case>
+				    <case value="2">认证成功</case> 
+				    <default /> 未认证
+			    </switch>
+		    </td>
+		   	<td>
+		    <switch name="vo.type"> 
+		    <case value="1">蚁客</case>
+		    <case value="2">开发商</case>
+		    <default /> 注册会员
+		    </switch>
+		    </td>
+		    <td>{$vo.parent_name}</td>
+		    <td>{$vo.telephone}</td>
+		    <td>{$vo.uuid}</td>
+		    <td>
+		    	<a href="{:U('userEdit',['id'=>$vo['user_id']])}">修改信息</a>
+		    	<a href="{:U('usersDelete',['id'=>$vo['user_id']])}">删除</a>
+		    </td>
+		</tr>
+		</volist>
+		
+		<tr>
+		<th colspan="9" style="text-align: left;">
+			<input type="button" id="checkbox-all" value="全选"  /> 
+			<input type="button" id="checkbox-reverse" value="反选"  />
+			<input type="button" id="checkbox-cancel" value="取消"  /> &nbsp;&nbsp;&nbsp;
+			 审核认证
+	   <select name="authentication" id="authentication" class="text">
+       	 	<option value=""> 请选择</option>         
+            <option value="-1" >认证失败</option>
+            <option value="0" >未认证</option>
+            <option value="1" >审核中</option>
+            <option value="2" >认证成功</option>           
+          </select>
+            用户类型：
+	   <select name="type" id="type">
+	   	<option value="">请选择</option>
+	  	  <option value="0" > 注册会员</option>
+          <option value="1" > 蚁客</option>
+          <option value="2" > 开发商</option>          
+	   </select>
+          <input type="button" id="batch" value="批量修改"  /> 
+          
+		</th>
+		</tr>
+		
+		
+		<tr>
+		<th colspan="9">{$page}</th>
+		</tr>
+	
+	</table>
+</div>
+<script>
+	var batchUserURL = "{:U(batchUser)}";
+</script>
+<include file="Index/footer" />

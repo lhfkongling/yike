@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{$title} &nbsp; 蚁客</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="keywords" content="{$keywords}">
+		<meta name="description" content="{$row.address}">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/mui.min.css?version={:getOneConfig('version')}">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/gaowei.css?version={:getOneConfig('version')}">
+		<link rel="stylesheet" href="__PUBLIC__/Home/css/poplayer.css?version={:getOneConfig('version')}" rel="stylesheet" />
+	</head>
+	<body style="background: #FFFFFF;">
+		<div style="display: none;" >
+		<php>if(CONTROLLER_NAME == 'Houses' and ACTION_NAME == 'show'  ) {</php>
+		<img src="<php>echo current($row['picture'])['url']</php>" />
+		<php>}</php>
+		<php>if(CONTROLLER_NAME == 'Artiles' and ACTION_NAME == 'show'  ) {</php>
+		<img src="<php>echo $row['image']</php>" />
+		<php>}</php>
+		</div>
+		<header id="header" class="mui-bar mui-bar-nav daohan_bg">
+			<a  class="action-back mui-icon mui-icon-left-nav mui-pull-left fanhui_baise"></a>
+			<h1 class="mui-title fanhui_baise">{$header}</h1>
+			<a class="mui-icon mui-pull-right fanhui_baise">北海</a>
+		</header>

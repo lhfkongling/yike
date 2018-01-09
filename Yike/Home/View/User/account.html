@@ -1,0 +1,102 @@
+<include file="Index:header" />
+		<div class="mui-content">
+			<form action="" method="post" id="updateFile" class="mui-input-group">
+				
+				<ul class="ul-block">
+					<li class="mui-input-row">
+						<label>昵称</label>
+						<input type="text" name="nickname" value="{$row.nickname}" class="mui-input-clear" placeholder="请输入昵称">
+					</li>
+					<li class="mui-input-row">
+						<label>名称</label>
+						<input type="text" name="name" value="{$row.name}" class="mui-input-clear" placeholder="请输入真实姓名">
+					</li>
+					
+					<!--<li class="mui-input-row">
+						<label>性别</label>
+						<span class="mui-radio mui-left">
+							<label>男</label>
+							<input name="radio1" name="sex" value="1" type="radio" <if condition="$row.type eq 1">checked</if> >
+						</span>
+						<span class=" mui-radio mui-left">
+							<label>女</label>
+							<input name="radio1" name="sex" value="2"  type="radio" <if condition="$row.type eq 2">checked </if> >
+						</span>
+					</li>-->
+					<li class="mui-input-row">
+						<label>联系电话</label>
+						<input type="number" name="telephone" value="{$row.telephone}" class="mui-input-clear" placeholder="请输入联系电话">
+					</li>
+					<li class="mui-input-row">
+						<label>会员类型</label>
+						
+						<if condition = "$row.authentication lt 1" >
+							<select name="type" style="color: #929292 ";>
+								<option value="">请选择会员类型</option>
+								<option value="1" <if condition="$row.type eq 1">selected="selected" </if> >蚁客</option>
+								<option value="2"  <if condition="$row.type eq 2">selected="selected" </if> >开发商</option>
+							</select>
+						<else />
+							<switch name="row.type">
+								<case value="1">蚁客</case>
+								<case value="2">开发商</case>
+							</switch>								
+						</if>
+					
+					</li>
+					<if condition="row.parent eq '' ">
+					<li class="mui-input-row">
+						<label>上级名称</label>
+						{$row.parent}
+					</li>
+					</if>
+						<li class="mui-input-row img">
+						<label>会员头像</label>
+						<img  class="upImg" id="piv0" src="<if condition="$row.face_url neq ''">{$row.face_url}<else />__PUBLIC__/Home/images/add.png</if>">
+						<input type="hidden" class="pichidden" name="face_url" value="{$row.face_url}" >
+					</li>
+					<li></li>
+				</ul>
+				<ul  class="ul-block">
+					
+					
+					
+					
+					<li class="mui-input-row">
+						<label>认证进度</label>
+							<switch name="row.authentication">
+								<case value="-1">认证失败</case>
+								<case value="0">未认证</case>
+								<case value="1">审核中</case>
+								<case value="2">已认证</case>
+								<default />未认证 
+							</switch>
+								
+					</li>
+					<li class="mui-input-row">
+						<label>工作证号</label>
+						{$row.uuid}
+					</li>
+					<li class="mui-input-row img">
+						<label>证件头像</label>
+						<img class="upImg" id="piv1" src="<if condition="$row.work_url neq ''">{$row.work_url}<else />__PUBLIC__/Home/images/add.png</if>">
+						<input type="hidden"  class="pichidden" name="work_url" value="{$row.work_url}" >
+					</li>
+					
+				
+					<li></li>
+				</ul>
+				<ul  class="ul-block">
+					<li class="btn">
+						<input type="hidden" name="user_id" value="{$row.user_id}" />
+						<input type="hidden" name="authentication" value="{$row.authentication}" />
+						<button type="submit" class="mui-btn-primary mui-btn-block">提 交</button>
+					
+					</li>
+					<li></li>
+				</ul>
+				</form>
+		</div>
+		
+<include file="Index:footer" />
+<include file="User:upbase64Image" />

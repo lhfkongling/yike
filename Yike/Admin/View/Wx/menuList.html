@@ -1,0 +1,61 @@
+<include file="Index/header" />
+<script>
+var updateUrl = '{:U("updateActorField")}';
+var createMenu = '{:U("createMenu")}';
+</script>
+
+<div class="header"><span></span>微信<font> 自定义菜单  &gt; 列表</font></div>
+<div class="h6bg"></div>
+<div class="content">
+	
+	<form action="" class="sourch" method="post" onsubmit="return sourchTagList()">
+		<a class="fr" href="{:U('menuEdit')}">+ 新增菜单</a>
+	    <a class="fr"  id="createMenu" style="margin-right:10px;">创建服务器菜单</a>
+	  
+	</form>
+	
+	<table cellpadding="0" cellspacing="0" class="tableList">
+		<tr>
+			<th width="30"><input type="checkbox" class="all"></th>
+			<th width="70">名称</th>
+		   
+		    <th width="100">上级</th>
+		    <th width="100">操作值</th>
+		    <th width="150">操作</th>
+		</tr>
+		<volist name="list" id="vo">
+		<tr id="id{$vo.menu_id}">
+		
+		 	 <td>{$vo.menu_id}</td>
+		     <td  style="text-align:left">{$vo.name}</td>
+		 	 <td>{$vo.parent}</td>
+		     <td>{$vo.url}</td>
+		     <td>
+		      	<a href="{:U('menuEdit',['id'=>$vo['menu_id']])}">修改</a>
+		         <a href="{:U('menuEdit',['parent_id'=>$vo['menu_id']])}">添加子菜单</a>
+	            <a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('menuDelete',['id'=>$vo['menu_id']])}';}">删除</a>
+		    </td>
+		    
+		</tr>
+		
+		
+		<volist name="vo.sub_button" id="val">
+			
+		<tr id="id{$val.menu_id}">
+	         <td>{$val.menu_id}</td>
+	         <td style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$val.name}</td>
+	         <td>{$val.parent}</td>
+	         <td>{$val.url}</td>
+	         <td>
+	            <a href="{:U('menuEdit',['id'=>$val['menu_id']])}">修改</a>
+	            <a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('menuDelete',['id'=>$val['menu_id']])}';}">删除</a>
+	        </td>
+	    </tr>
+
+		</volist>
+		
+		</volist>
+	
+	</table>
+</div>
+<include file="Index/footer" />

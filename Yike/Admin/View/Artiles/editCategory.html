@@ -1,0 +1,51 @@
+<include file="Index/header" />
+
+
+<script>
+  var updateUrl = '{:U("updateField")}';
+  var checkRepeatName = '{:U("checkRepeatName")}';
+  var imagesCount = '{$row.imgCount}';
+  </script>
+
+<div class="header"><span></span>文章分类
+<font> 文章分类 &gt; <if condition="$row.cat_id gt 0">修改分类<else/>新增分类</if> </font>
+</div>
+<div class="h6bg"></div>
+<div class="content">
+  <form action="" method="post" class="tableEdit">
+    <ul class="field">
+      <li><span><i>*</i>分类名称</span>
+        <input type="text" name="cat_name" id="cat_name" class="checkName" data-type="tags" data-tip="分类名称已经在，请重新填写" placeholder="请输入分类名称" value="{$row.cat_name}"> <font class="tip">分类名称已经在，请重新填写</font>
+      </li>
+      
+      
+         <li><span>是否显示</span>
+         <label> <input type="radio" name="is_show" 
+            
+            <if condition="$row.is_show eq '1'"> checked="checked" </if>
+            value="1"> <img src="/Public/Admin/images/yes.png"  class="boole"></label>
+        <label> <input type="radio" name="is_show" 
+            
+            <if condition="$row.is_show eq '0'"> checked="checked" </if>
+            value="0"><img src="/Public/Admin/images/no.png" class="boole"></label>
+        
+      </li>	
+      <li><span>分类排序</span>
+        <input type="text" name="sort" placeholder="请输入分类排序" value="{$row.sort}">
+      <br/>  类别排序以数字越大顺序越优先（如：100 > 默认 > 1）</li>
+     
+     
+       <li><span>备注</span> <textarea name="note">{$row.note}</textarea></li>
+    </ul>
+    
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+      <input type="submit" class="sub" value="保存" />
+      <input type="hidden" name="cat_id" value="{$row.cat_id}">
+    </div>
+  </form>
+  </span> </div>
+
+
+
+<include file="Index/footer" />

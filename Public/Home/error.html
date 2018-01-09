@@ -1,0 +1,65 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?><!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>蚁客</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/mui.min.css">
+<link rel="stylesheet" href="__PUBLIC__/Home/css/gaowei.css">
+<style type="text/css">
+/**{ padding: 0; margin: 0; }
+html { font-size:14px;}
+body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 1.5rem; text-align:center; }*/
+.system-message{ padding: 24px 48px; }
+.system-message h1{ font-size: 5rem; font-weight: normal; width:8rem; height:8rem; padding:2rem;  margin: 5rem auto 0; border:2px solid #ccc; border-radius:50%; }
+.system-message h1 img {width: 100%;}
+.system-message .jump{ padding-top: 0.5rem; text-align: center;}
+.system-message .jump a{ color: #333;}
+.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 2.0rem ; text-align: center;}
+.system-message .detail a{ list-style:none; display:inline-block; text-decoration:none;  margin:0 20px; color:#fff; border-radius:5px; padding:0 50px; height:30px; line-height:30px; }
+.system-message .detail a.go { background:rgba(228, 27, 81, 1);}
+.system-message .detail a.back { background:rgba(102, 102, 102, 1);}
+#href {text-decoration:none;}
+.mui-content { background: none;}
+</style>
+</head>
+<body>
+	
+<header id="header" class="mui-bar mui-bar-nav daohan_bg">
+	<a class=" fanhui_baise"></a>
+	<h1 class="mui-title fanhui_baise">提示信息</h1>
+	<a class="mui-icon mui-pull-right fanhui_baise"></a>
+</header>
+
+<div class="mui-content">
+	<div class="system-message">
+		<h1><img src="__PUBLIC__/Admin/images/no.png"> </h1>
+		
+		<p class="success"><?php echo($error); ?></p>
+		
+		<p class="jump">
+			<b id="wait"><?php echo($waitSecond); ?></b> 后页面自动跳转 <a id="href" href="<?php echo($jumpUrl); ?>"></a>  
+		</p>
+	</div>
+
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
+</html>

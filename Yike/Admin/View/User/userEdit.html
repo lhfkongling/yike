@@ -1,0 +1,112 @@
+<include file="Index:header" />
+  <script>
+  var imagesCount = parseInt('{$row.imgCount}');
+  var checkRepeatField = '{:U("checkRepeatField")}';
+  </script>
+  </head>
+
+  <body>
+<div class="header"><span></span>用户 <font>
+  <if condition="$row.type eq 3">付费会员
+    <else/>
+    注册用户</if>
+  &gt; 修改资料</font> </div>
+<div class="h6bg"></div>
+<div class="content">
+    <form action="" method="post" class="tableEdit user " >
+    <ul class="field">
+    
+        <li><span><i>*</i>会员昵称</span>
+        <input type="text" name="nickname" id="nickname"   placeholder="请输入用户昵称" value="{$row.nickname}">
+      </li>
+      
+      
+        <li><span><i>*</i>名称</span>
+        <input type="text" name="name" id="name"   placeholder="请输入用户名称" value="{$row.name}">
+      </li>
+     
+     
+        <li><span><i>*</i>电话</span>
+        
+        <input type="text" name="telephone" id="telephone"   placeholder="请输入电话" value="{$row.telephone}">
+      </li>
+      
+      <if condition="$row.type eq 1">
+        <li><span>会员上级</span>
+        <select name="parent_id" >
+       		<option value="0"> 请选择</option>
+            <volist name="parent" id="vo">
+            <option value="{$vo.user_id}" <if condition="$row[parent_id] eq $vo[user_id]"> selected="selected" </if>>{$vo.name}</option>
+            </volist>
+          </select> 
+      </li>
+      </if>
+      
+       <li><span>会员类型</span>
+        <select name="type" >
+          <option value="1" <if condition="$row[type] eq 1"> selected="selected" </if>> 蚁客</option>
+          <option value="2" <if condition="$row[type] eq 2"> selected="selected" </if>> 开发商</option>
+          </select> 
+      </li>
+       <li><span>会员分组</span>
+        <select name="group_id" >
+       	 	<option value=""> 请选择</option>
+            <volist name="groups" id="vo">
+            <option value="{$vo.id}" <if condition="$row[group_id] eq $vo[id]"> selected="selected" </if>>{$vo.name}</option>
+            </volist>
+          </select>
+      
+      </li>
+       
+      
+      
+      
+      
+        <li><span>工作证号</span>
+        <input type="text" name="uuid" id="uuid"   placeholder="请输入用户昵称" value="{$row.uuid}">
+      </li>
+      
+       <li><span>审核认证</span>
+         <select name="authentication" >
+       	 	<option value=""> 请选择</option>
+         
+            <option value="-1" <if condition="$row[authentication] eq -1"> selected="selected" </if>>认证失败</option>
+            <option value="0" <if condition="$row[authentication] eq 0"> selected="selected" </if>>未认证</option>
+            <option value="1" <if condition="$row[authentication] eq 1"> selected="selected" </if>>审核中</option>
+            <option value="2" <if condition="$row[authentication] eq 2"> selected="selected" </if>>认证成功</option>
+           
+          </select>
+
+      </ul>
+     <ul class="field picture">
+    
+        <li class="">
+        	<span><i>*</i>工作证头像</span>
+       		<img width="100" id="face_url" height="120" src="<empty name="row.face_url">__PUBLIC__/Home/images/add.png<else />{$row.face_url}</empty>" >
+          <input type="hidden" name="face_url" class="pichidden"   value="{$row.face_url}" />
+      </li>
+      
+         <li class=""><span><i>*</i>会员头像</span>
+         	<img width="100" id="work_url" height="120"  src="<empty name="row.work_url">__PUBLIC__/Home/images/add.png<else />{$row.work_url}</empty>" >
+          <input type="hidden" name="work_url" class="pichidden"   value="{$row.work_url}" /> 
+      </li>
+       <li><span>微信openID</span>
+       {$row.wechat} &nbsp;
+      </li>
+        <li><span>上次登录IP</span>
+       {$row.login_ip} &nbsp;
+      </li>
+      
+        <li><span>上次登录时间</span>
+        {$row.login_time} &nbsp;
+      </li>
+   </ul>
+    <div class="clear" style="height:2px;"></div>
+    <div class="btn "> <a href="javascript:history.back();">取消</a>
+        <input type="submit" class="sub" value="保存" />
+        <input type="hidden" name="user_id" value="{$row.user_id}">
+      </div>
+  </form>
+  </div>
+<include file="User:upbase64Image" />
+<include file="Index/footer" />

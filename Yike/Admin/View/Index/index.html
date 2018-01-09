@@ -1,0 +1,55 @@
+<include file="Index/header" />
+
+<div class="header"><span></span>首页</div>
+<div class="h6bg"></div>
+
+<div class="content main">
+  <ul class="navMain">
+    <li>
+   
+      </a> <a href="{:U('Bespoke/listBespoke')}">
+      <div class="fl ad"  data-type="actor">预约信息</div>
+      <div class="fr">{$Usersbuildings|resetFormatNumber=###}<span >
+        <点击进入>
+        </span></div>
+      </a>  
+        <a href="{:U('Houses/listHouses' ,['tag'=>'1'])}">
+      <div class="fl count"  data-type="goods">新房源</div>
+      <div class="fr">{$build|resetFormatNumber=###}<span >
+        <点击进入>
+        </span></div>
+      </a>
+         <a href="{:U('Houses/listHouses' ,['tag'=>'2'])}">
+      <div class="fl count"  data-type="users">二手房</div>
+      <div class="fr">{$second|resetFormatNumber=###}<span >
+        <点击进入>
+        </span></div>
+      </a>
+      </li>
+    
+       <li>
+       
+       <a href="{:U('User/userList')}">
+      <div class="fl users"  data-type="users">用户</div>
+      <div class="fr">{$user|resetFormatNumber=###}<span >
+        <点击进入>
+        </span></div>
+      </a>
+       <a href="{:U('Wx/listUserMessage')}">
+      <div class="fl artile"  data-type="count">微信咨询</div>
+      <div class="fr"><span >
+        <点击进入>
+        </span></div>
+      </a>
+         <a href="{:U('Common/config')}">
+      <div class="fl config"  data-type="config">系统配置</div>
+      <div class="fr"><span >
+        <点击进入>
+        </span></div>
+      </a>
+      
+   </li>
+  </ul>
+</div>
+
+<include file="Index/footer" />

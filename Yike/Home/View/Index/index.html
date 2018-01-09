@@ -1,0 +1,150 @@
+ <include file="Index:header" />
+	<div style="padding:44px 0  55px;">
+		
+		<div id="slider" class="mui-slider " style="background-color: black;">
+			<div class="mui-slider-group  mui-slider-loop">
+				
+				<!-- 第一张 -->
+				
+				<div class="mui-slider-item">
+					<div class="item-logo" >
+						<a href="<php>echo end($banner)['link']</php>" title="<php>echo end($banner)['name']</php>">
+						<img src="<php>echo end($banner)['img_url']</php>" title="<php>echo end($banner)['name']</php>" alt="<php>echo end($banner)['name']</php>">
+						</a>
+					</div>
+				</div>
+				
+				<volist name="banner" id="vo">
+				<div class="mui-slider-item">
+					<div class="item-logo" >
+						<a href="{$vo.link}" title="{$vo.name}">
+						<img src="{$vo.img_url}" title="{$vo.name}" alt="{$vo.name}">
+						</a>
+					</div>
+				</div>
+				</volist>
+				
+				<div class="mui-slider-item">
+					<div class="item-logo" >
+						<a href="<php>echo current($banner)['link']</php>" title="<php>echo current($banner)['name']</php>">
+						<img src="<php>echo current($banner)['img_url']</php>" title="<php>echo current($banner)['name']</php>" alt="<php>echo current($banner)['name']</php>">
+						</a>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="mui-slider-indicator">
+				
+				<foreach name="banner" item="vo" key="k" >
+				<div class="mui-indicator <if condition="$k eq 0">mui-active</if>"></div>
+				</foreach>
+				
+			</div>
+		</div>
+		
+			<div class="padding1em">
+				<h5>
+					<span>新楼盘共计：{$buildCount}个</span>   
+					<span >二手房共计：{$secondCount}套</span>
+				</h5>
+			</div>
+			
+			<!--
+        	作者：33191690@qq.com
+        	时间：2017-09-21
+        	描述：图标
+        -->
+        
+        <ul class="midle-nav">
+            <li class="">
+            	<a href="{:U('Houses/listHouses',['tag'=>1])}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/011.png" /></span>
+                    <div class="mui-media-body">新房</div></a></li>
+            <li class=""><a href="{:U('Houses/listHouses',['tag'=>2])}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/022.png" /></span>
+                    <div class="mui-media-body">二手房</div></a></li>
+           
+            <li class=""><a href="{:U('Artiles/listArtiles')}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/033.png" /></span>
+                    <div class="mui-media-body">房产资讯</div></a></li>
+         
+	    </ul>
+	    <ul class="midle-nav">
+	   
+            <li class=""><a href="{:U('Houses/findBuildings',['tag'=>1])}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/044.png" /></span>
+                    <div class="mui-media-body">找房</div></a></li>
+            <li class=""><a href="{:U('Artiles/img',['tag'=>'11'])}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/055.png" /></span>
+                    <div class="mui-media-body">垫资解压</div></a></li>
+             <li class=""><a href="{:U('Artiles/img',['tag'=>'22'])}">
+                    <span class="mui-icon "><img src="__PUBLIC__/Home/images/066.png" /></span>
+                    <div class="mui-media-body">抵押查询</div></a></li>
+           
+		        </ul> 
+		        
+        	<p class="message mui-clearfix"><a href="{:U('Index/counter')}">房贷计算器</a> <a href="{:U('Artiles/listArtiles')}">购房贴士</a> </p>
+			
+			<div id="guanggao" class="mui-clearfix">
+				<volist name="leftad" id="vo">
+				<a class="fl"href="{$vo.link}" title="{$vo.name}"><img src="{$vo.img_url}" title="{$vo.name}" alt="{$vo.name}"></a>
+				</volist>
+				<volist name="rightad" id="vo">
+				<a  class="fr"href="{$vo.link}" title="{$vo.name}"><img src="{$vo.img_url}" title="{$vo.name}" alt="{$vo.name}"></a>
+				</volist>
+				
+			</div>
+			
+			
+			<div id="segmentedControl" class="mui-segmented-control" style="border:#e6e6e6 solid 1px;; background: #ebebeb; color: #6641E2;">
+				<a class="mui-control-item mui-active" href="#item2">新房推荐</a>
+				<a class="mui-control-item" href="#item3">二手房</a>
+			</div>
+
+			<div id="item2" class="mui-control-content mui-active">
+				<ul class="mui-table-view index-build" >
+					<volist name="build" id="vo">
+					<li class="mui-table-view-cell mui-media">
+						<a href="{:U('Houses/show',['id'=>$vo[house_id]])}">
+							<img class="mui-pull-left" style="margin-right: 1rem; max-width: 100%;" src="{$vo.picture.0.url}" />
+							<div class="mui-media-body" style="line-height: 30px;">
+								{$vo.name}
+								<p class='mui-ellipsis'>建面：{$vo.area}㎡    {$vo.address}</p>
+								<p class='mui-ellipsis'>
+									<span class="yuanjiaojuxing xinfan_color_bg_lv" >均价：{$vo.average_price}元</span>
+									<span class="yuanjiaojuxing xinfan_color_bg_huang m_left" >特价：<if condition="$vo.bargain_price eq ''">待定<else />{$vo.bargain_price}元</if></span>
+								</p>
+							</div>
+						</a>
+					</li>
+					</volist>
+				</ul>
+			</div>
+			<div id="item3" class="mui-control-content">
+				<ul class="mui-table-view index-build">
+					<volist name="second" id="vo">
+					<li class="mui-table-view-cell mui-media">
+						<a href="{:U('Houses/show',['id'=>$vo[house_id]])}">
+							<div style="margin-right: 1em; width: 35%; height:5rem; display:inline-block;"> 
+								<img class="mui-pull-left" style="max-width: 100%;max-height:5rem; width: auto;" src="{$vo.picture.0.url}" />
+							</div>
+							<div class="mui-media-body" style="line-height: 30px;display:inline-block;">
+								{$vo.name}
+								<p class='mui-ellipsis'>{$vo.layout}  {$vo.orientation}  {$vo.address}</p>
+								<p class='mui-ellipsis'><span class="yuanjiaojuxing erfan_color_bg_lv">{$vo.sell_price}万</span >
+									<span class="yuanjiaojuxing erfan_color_bg_lan m_left">{$vo.area}㎡ </span></p>
+							</div>
+						</a>
+					</li>
+					</volist>
+				</ul>
+			</div>
+			<div class="padding1em mui-text-center">
+				<h6>广西蚁客科技有限公司版权所有</h6>
+			</div>
+		</div>
+        
+        <include file="Index:nav" />
+        <include file="Index:footer" />
+	

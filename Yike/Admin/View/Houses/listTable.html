@@ -1,0 +1,55 @@
+<include file="Index/header" />
+
+
+<div class="header"><span></span>
+	<switch name="table">
+		<case value="floor">楼层</case>
+		<case value="layout">户型</case>
+		<case value="region">区域</case>
+		<case value="nature">特色</case>
+		<case value="fitment">装修</case>
+		<case value="orientation">朝向</case>
+		<case value="property">产权</case>
+		<case value="type">类型</case>
+		<case value="from">来源</case>
+		<case value="area">面积</case>
+		<case value="age">房龄</case>
+	</switch>
+	
+</div>
+<div class="h6bg"></div>
+<div class="content">
+
+	<form action="" class="sourch" method="post">
+		<a class="fr"  href="{:U('editTable',['table'=>$table])}">+ 新增</a>
+	</form>
+
+	<table cellpadding="0" cellspacing="0" class="tableList">
+		<tr>
+			<th width="30"><input type="checkbox" class="all"></th>
+			<th width="70">ID</th>
+		    <th width="150">名称</th>   
+		    <th width="50">排序</th>
+		    <th width="150">操作</th>
+		</tr>
+		<volist name="list" id="vo">
+		<tr id="id{$vo.tag_id}">
+			<td><input type="checkbox" class="id" value="{$vo.id}"></td>
+			<td>{$vo.id}</td>
+		    <td>{$vo.name}</td>
+		    
+		    <td><span class="sort" data-id="{$vo.id}">{$vo.sort}</span></td>
+		    <td><a href="{:U('editTable',['table'=>$table,'id'=>$vo['id']])}">修改</a>
+		    <a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('delTable',['table'=>$table,'id'=>$vo['id']])}';}">删除</a> </td>
+		</tr>
+		
+		</volist>
+		
+		<tr>
+		<th colspan="9">{$page}</th>
+		</tr>
+
+	</table>
+</div>
+
+<include file="Index/footer" />

@@ -1,0 +1,99 @@
+<include file="Index:header" />
+<script>
+var updateUrl = '{:U("updateField")}';
+</script>
+</head>
+
+<body>
+
+<div class="header"><span></span>房源列表</div>
+<div class="h6bg"></div>
+<div class="content">
+
+<form action="" class="sourch" method="post">
+	<a class="fr" href="{:U('editHouses',['tag'=>$tag])}">+ 新增房源</a>
+	 <strong>信息筛选：</strong>
+	      房源标题： <input type="text" name="name" class="text" value="{$data.name}"  placeholder="输入房源标题">
+	   发布用户：
+	   <select name="user_id"  class="text" >
+			<option value="">请选择发布用户</option>
+			<volist name="user" id="vo" >
+			<option value="{$vo.user_id}" <if condition="$data.user_id eq $vo[user_id]"> selected="selected" </if>>{$vo.name} | {$vo.nickname} </option>
+			</volist>
+		</select>
+	    <input type="submit" class="subBtn" value="搜&nbsp;&nbsp;索">
+	    <input type="hidden" name="order" value="{$data.order}"/>
+	    <input type="hidden" name="sort" value="{$data.sort}"/>
+	    <input type="hidden" name="type" value="{$data.type}"/>
+	    <input type="hidden" name="tag" value="{$tag}"/>
+</form>
+
+<table cellpadding="0" cellspacing="0" class="tableList">
+<tr>
+	<th width="30"><input type="checkbox" class="all"></th>
+	<th width="70">房源ID</th>
+    <th width="150">房源标题</th>  
+    
+    <th width="150">建设面积(㎡)</th>  
+    <if condition = "$tag eq 1">
+    <th width="150">均价(元/㎡)</th>   
+    <th width="100">特价(元/㎡)</th>
+    </if>
+    <if condition = "$tag eq 2">
+    <th width="150">售价(元)</th>   
+    <th width="100">单价(元/㎡)</th>
+    </if>
+    
+    <th width="100">地址</th> 
+    <th width="100">发布会员</th>
+    <th width="100">排序</th>
+    <th width="50">是否推荐</th>
+    <th width="50">是否显示</th>
+    <th width="150">操作</th>
+</tr>
+<volist name="list" id="vo">
+<tr id="id{$vo.tag_id}">
+	<td><input type="checkbox" class="id" value="{$vo.house_id}"></td>
+	<td>{$vo.house_id}</td>
+    <td>{$vo.name}</td>
+    <td>{$vo.area}</td>
+    
+    <if condition = "$tag eq 1">
+    <td>{$vo.average_price}</td>
+    <td>{$vo.bargain_price}</td>
+    </if>
+    
+    <if condition = "$tag eq 2">
+     <td>{$vo.sell_price}</td>
+    <td>{$vo.average_price}</td>
+    </if>
+
+    <td>{$vo.address}</td>
+   
+    <td>{$vo.user_name}</td>   
+     <td>{$vo.sort}</td>
+    <td><switch name="vo.is_best">
+    <case value="0"><img src="/Public/Admin/images/no.png" class="boole"></case>
+    <case value="1"><img src="/Public/Admin/images/yes.png"  class="boole"></case>
+    <defalut />错误参数
+    </switch></td>
+     <td><switch name="vo.release">
+    <case value="0"><img src="/Public/Admin/images/no.png" class="boole"></case>
+    <case value="1"><img src="/Public/Admin/images/yes.png"  class="boole"></case>
+    <defalut />错误参数
+    </switch></td>
+    <td>
+    	<a href="{:U('editHouses',['id'=>$vo['house_id']])}">修改</a>
+    	<a href="javascript:if(confirm('你确定要删除这条信息吗')){location.href='{:U('delHouses',['id'=>$vo['house_id']])}';}">删除</a> 
+    </td>
+</tr>
+
+</volist>
+
+<tr>
+<th colspan="9">{$page}</th>
+</tr>
+
+</table>
+</div>
+<include file="Index/footer" />

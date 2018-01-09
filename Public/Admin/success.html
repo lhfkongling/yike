@@ -1,0 +1,57 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>跳转提示</title>
+<style type="text/css">
+*{ padding: 0; margin: 0; }
+body{ background: #fff; font-family: '微软雅黑'; color: #333; font-size: 16px; text-align:center; }
+.system-message{ padding: 24px 48px; }
+.system-message h1{ font-size: 70px; font-weight: normal; width:80px; height:60px; padding:50px 40px;  margin: 150px auto 0; border:2px solid #ccc; border-radius:80px; }
+.system-message .jump{ padding-top: 10px}
+.system-message .jump a{ color: #333;}
+.system-message .success,.system-message .error{ line-height: 1.8em; font-size: 34px ; margin-bottom:30px;}
+.system-message .detail a{ list-style:none; display:inline-block; text-decoration:none;  margin:0 20px; color:#fff; border-radius:5px; padding:0 50px; height:30px; line-height:30px; }
+.system-message .detail a.go { background:rgba(228, 27, 81, 1);}
+.system-message .detail a.back { background:rgba(102, 102, 102, 1);}
+#href {text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="system-message">
+<h1><img src="__PUBLIC__/Admin/images/yes.png"> </h1>
+
+
+<p class="success"><?php echo($message); ?></p>
+
+
+<p class="detail">
+<if condition="$go.url neq ''"><a class="go" href="{$go.url}">{$go.name}</a></if>
+<if condition="$back.url neq ''"><a class="back" href="{$back.url}">{$back.name}</a></if>
+</p>
+<p class="jump">
+页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+</p><!--
+<p class="jump">
+<b id="wait"><?php echo($waitSecond); ?></b> 后页面自动跳转到   <if condition="$go.url neq ''"><a id="href" href="{$go.url}">{$go.name}</a><else/><a id="href" href="{$back.url}">{$back.name}</a></if>  
+</p>-->
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
+</html>

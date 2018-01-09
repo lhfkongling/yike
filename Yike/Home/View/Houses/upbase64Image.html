@@ -1,0 +1,140 @@
+
+<style>
+.base64Img {
+	margin: 0;
+	text-align: center;
+	display:none;
+	position:fixed;
+	top:4rem; 
+	right:0px;
+	width:100%;
+	height:100%;
+	background:#fff;
+	z-index: 9999;
+}
+#clipArea {
+	height: 25rem;
+	border:0.1rem solid #333;
+}
+#file,
+#clipBtn {
+	margin: 20px;
+}
+#file { display:none;} 
+#upImage ,#closeBox ,#clipBtn ,#fileBtn{ border:none; color:#fff;padding:0.2rem 0.5rem ; margin:1rem auto; background:#16997F; border-radius:0.2rem;}
+#view {
+	margin: 0 auto;
+	width: 10rem;
+	height: 12rem;
+	background-color: #666;
+	border:0.1rem solid #333;
+}
+</style>
+
+<div class="base64Img" ontouchstart="">
+	<div id="clipArea"></div>
+	<span id="fileBtn">上传文件</span>
+	<input type="file" id="file">
+	<span id="clipBtn">截取</span>
+	<span id="upImage" onclick="getUpinfo()">上传</span>
+	<span id="closeBox" onclick="closeBox()">取消</span>
+	
+	<div id="view"></div>
+
+</div>
+
+
+<script src="__PUBLIC__/Common/js/hammer.min.js"></script>
+<script src="__PUBLIC__/Common/js/iscroll-zoom-min.js"></script>
+<script src="__PUBLIC__/Common/js/lrz.all.bundle.js"></script>
+<script src="__PUBLIC__/Common/js/PhotoClip.js"></script>
+
+<script>
+	var _viewH = {$img_size[1]}/{$img_size[0]} ;
+	var _cW = document.body.clientWidth;
+	$('#view').css('height',_viewH*10  + 'rem');
+	$('#clipArea').css('height',_viewH*_cW  + 'px');
+	var doBase64Image = '{:U("Admin/Index/doBase64Image")}';
+	var imageDate = '';
+	var picNumber = 0 ;
+	var  pc ;
+	var Clip = (function(){
+		
+		var x = {$img_size[0]} ;
+		
+		var y = {$img_size[1]} ;
+		
+		return function(x,y){
+			return  new PhotoClip('#clipArea', {
+				size: [x,y],
+				outputSize: 640,
+				//adaptive: ['60%', '80%'],
+				file: '#file',
+				view: '#view',
+				ok: '#clipBtn',
+				//img: 'img/mm.jpg',
+				loadStart: function() {
+					console.log('开始读取照片');
+				},
+				loadComplete: function() {
+					console.log('照片读取完成');
+				},
+				done: function(dataURL) {
+					console.log(dataURL);
+					imageDate = dataURL ;
+				},
+				fail: function(msg) {
+					webToast(msg,"middle",3000);
+				}
+			});
+		}
+	})();
+	
+	//默认图片尺寸
+	 pc = Clip({$img_size[0]} , {$img_size[1]});
+	
+	if( $('#picture').length>0 ){
+		//	房源图片尺寸
+		$('#picture').delegate('img', 'click',function(){
+			  pc = Clip({$img_size[0]} , {$img_size[1]});
+			
+		});
+		
+		//在售户型图片尺寸
+		$('.house_type').delegate('img', 'click',function(){
+			 pc = Clip(350,500);
+			
+		});
+		
+	}
+	
+		
+	$(function(){
+		$('#fileBtn').click(function(){
+			$('#file').click();
+		});
+	})
+
+function getUpinfo(){
+	console.log('imageDate');
+	console.log('imageDate:'+imageDate);
+	if(imageDate == '') {
+		webToast('请选择图片截取',"middle",3000);
+	}else{
+		 
+		ajaxobj(doBase64Image,{imageDate:imageDate,picNumber:picNumber},responceBase64Image);
+	}
+	
+}
+function responceBase64Image(data){
+	$('.base64Img').hide();
+	$('#'+data.picNumber).attr('src',data.url);
+	$('#'+data.picNumber).next().val(data.url);
+}
+function closeBox(){
+	$('.base64Img').hide();	
+}
+	// 加载的图片必须要与本程序同源，否则无法截图
+//	pc.load('');
+
+</script>

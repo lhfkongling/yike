@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>蚁客后台管理系统</title>
+<link href="/Public/Admin/css/style.css" rel="stylesheet" />
+
+<script src="/Public/Common/js/jquery-1.10.2.min.js"></script>
+<script src="/Public/Common/js/ajaxObject.js"></script>
+<script src="/Public/Common/js/popShow.js"></script>
+<script src="/Public/Admin/js/common.js"></script>
+</head>
+
+<body class="index">
+<div class="top">
+		<span class="fr"><img src="/Public/Admin/images/user.png" >
+        {$Think.session.admin.admin_name}
+        <a href="{:U('Common/logout')}"><i></i>登出</a>
+        </span>
+    	<img src="/Public/Home/images/logo.png">
+  		<a href="/" class="goIndex" target="_blank">查看网站首页</a>
+</div>
+</div>
+<div class="left">
+	<div class="menu">
+    	<ul>
+        	<li class="<php>if(CONTROLLER_NAME == 'Index' ) echo 'on';</php>" ><a href="{:U('Index/main')}"  >首页</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Artiles' and (ACTION_NAME == 'listCategory'  or ACTION_NAME == 'editCategory'  )  ) echo 'on';</php>" ><a href="{:U('Artiles/listCategory')}" >文章分类</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Artiles' and (ACTION_NAME == 'listArtiles'  or ACTION_NAME == 'editArtiles'  )  ) echo 'on';</php>"><a href="{:U('Artiles/listArtiles')}" >文章列表</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Bespoke' ) echo 'on';</php>" ><a href="{:U('Bespoke/listBespoke')}" >预约列表</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $tag == 1 ) echo 'on';</php>" ><a href="{:U('Houses/listHouses' ,['tag'=>'1'])}"  >新楼盘列表</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $tag == 2 ) echo 'on';</php>" ><a href="{:U('Houses/listHouses' ,['tag'=>'2'])}"  >二手房列表</a></li>    
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'layout' ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'layout'])}"  >户型</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'floor'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'floor'])}"  >楼层</a></li> 
+            <!--<li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'region'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'region'])}"  >区域</a></li>--> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'nature'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'nature'])}"  >特色</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'fitment'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'fitment'])}"  >装修</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'orientation'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'orientation'])}"  >朝向</a></li> 
+            
+            
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'property' ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'property'])}"  >产权</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'type'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'type'])}"  >类型</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'from'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'from'])}"  >来源</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'area'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'area'])}"  >面积</a></li> 
+            <li class="<php>if(CONTROLLER_NAME == 'Houses' and $table == 'age'  ) echo 'on';</php>" ><a href="{:U('Houses/listTable',['table'=>'age'])}"  >房龄</a></li> 
+            
+            
+            <li  class="<php>if(CONTROLLER_NAME == 'User' and (ACTION_NAME == 'groupList'  or ACTION_NAME == 'groupEdit'  )  ) echo 'on';</php>" ><a href="{:U('groupList')}" >会员分组</a></li>
+            
+            <li  class="<php>if(CONTROLLER_NAME == 'User' and (ACTION_NAME == 'userList'  or ACTION_NAME == 'userEdit'  ) ) echo 'on';</php>" ><a href="{:U('User/userList')}" >会员信息</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Common'  and (ACTION_NAME == 'adList'  or ACTION_NAME == 'adEdit'  ) ) echo 'on';</php>" ><a href="{:U('Common/adList')}" >广告</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Common' and   ACTION_NAME == 'config' ) echo 'on';</php>" ><a href="{:U('Common/config')}" >系统配置</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Wx' ) echo 'on';</php>"><a href="{:U('Wx/index')}" >微信</a></li>
+            <li class="<php>if(CONTROLLER_NAME == 'Bak' ) echo 'on';</php>"><a href="{:U('Bak/index')}" >数据备份</a></li>
+           
+        </ul>
+	</div>
+</div>
+<div class="right">
+	<div class="rightmain">
+		

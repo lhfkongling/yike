@@ -1,0 +1,203 @@
+<include file="Index:header" />
+	
+		<div class="mui-content">
+			<div class="house-info">
+				<img src="{$building.picture.0.url}" class="fl">
+				
+				<h3>{$building.name}</h3>
+				<p>{$building.address}</p>			
+			</div>
+			<form action="" method="post" class="mui-input-group">
+						<div class="mui-input-row">
+							<label>蚁客姓名</label>{$row.userYk}
+						</div>
+						<div class="mui-input-row">
+							<label>蚁客编号</label>{$row.uuid}
+						</div>
+				
+						<div class="mui-input-row">
+							<label>客户姓名</label>
+							<input type="text" name="name"  value="{$row.name}" class="mui-input-clear" placeholder="请输入客户姓名">
+						</div>
+						<div class="mui-input-row">
+							<label>联系电话</label>
+							<font id="hidden">隐号报备</font>
+							<input type="text" value="{$row.telephone}" id="hidePhone" style="display: none;" class="mui-input-clear">
+							<input type="text" name="telephone" id="showPhone"  value="{$row.telephone}" class="mui-input-clear" placeholder="请输入联系电话">
+						</div>
+						
+						<div class="mui-input-row">
+							<label>随行人数</label>
+							<input type="number" name="number" value="{$row.number}" class="mui-input-clear" placeholder="请输入随行人数">
+						</div>
+						<div class="mui-input-row">
+							<label>看房时间</label>
+							<input type="text" name="see_time" value="{$row.see_time}" id="seetime" data-options='{"type":"hour","labels":["年", "月", "日", "时段", "分"]}' class="mui-input-clear" placeholder="选择看房时间">
+						</div>
+						
+						<if condition="$row.ub_id gt 0">
+						<div class="mui-input-row" style="height: auto;">
+							<label>进度</label>
+							<php>
+								if($type == 1){
+							</php>
+							
+								
+								<switch name="row.agree">
+									<case value="-1">预约失败</case>
+									<case value="0">已提交</case>
+									<case value="1">预约成功</case>
+									<case value="2">交订</case>
+									<case value="3">付首付</case>
+									<case value="4">按揭中</case>
+									<case value="5">放款</case>
+									<default /> 已提交
+								</switch>
+							 
+							<php>}else{</php>
+							
+								<select  name="agree" style="color: #929292 "; >
+									<option value="-1" <if condition="$row[agree] eq '-1'">selected="selected" </if> >预约失败</option>
+									<option value="0" <if condition="$row[agree] eq '0'"> selected="selected" </if> >已提交</option>
+									<option value="1" <if condition="$row[agree] eq '1'"> selected="selected" </if> >预约成功</option>
+									<option value="2" <if condition="$row[agree] eq '2'"> selected="selected" </if> >交订</option>
+									<option value="3" <if condition="$row[agree] eq '3'"> selected="selected" </if> >付首付</option>
+									<option value="4" <if condition="$row[agree] eq '4'"> selected="selected" </if> >按揭中</option>
+									<option value="5" <if condition="$row[agree] eq '5'"> selected="selected" </if> >放款</option>
+								</select>
+							<php>}</php>
+							
+						</div>
+						<div class="mui-input-row" style="height: auto;">
+							<label>备注</label>
+							<if condition="$type eq '1'">{$row.note} <else/>
+								
+								<textarea name="note" >{$row.note}</textarea>
+								
+							</if>
+							
+						</div>
+						</if>
+						
+						<div class="mui-content-padded">
+							<input type="hidden" name="ub_id" id="ub_id" value="{$row.ub_id}" />
+							<input type="hidden" name="builduser_id" value="{$building.user_id}" />
+							<input type="hidden" name="user_id" value="{$row.user_id}" />
+							<input type="hidden" name="uuid" value="{$row.uuid}" />
+							<input type="hidden" name="build_id" value="{$building.house_id}" />
+							<button type="submit" class="mui-btn mui-btn-primary mui-btn-block">提 交</button>
+						
+						</div>
+					</form>
+			
+		</div>
+		
+
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/app.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/mui.picker.min.css" />
+		<style>
+			#hidden {
+				position: absolute;
+				border-radius: 0.4rem;
+			    background: #8cc540;
+			    color: #fff;
+			    height: 25px;
+			    line-height: 25px;
+			    padding: 0 10px;
+			    right: 5px;
+			    top: 5px;
+			    z-index: 9999;
+			} 
+		</style>
+		
+	<include file="Index:footer" />
+	
+		<script src="__PUBLIC__/Home/js/mui.picker.min.js"></script>
+		<script>
+
+		/**
+		 *手机显号隐号切换 函数
+		 */
+		
+		function tagPhone(){
+//			console.log(this);
+			if($('#showPhone').is(':hidden')){
+				$('#hidden').html('隐号报备');
+				$('#showPhone').show();
+				$('#hidePhone').hide();
+			}else{ 
+				var  phone = $('#showPhone').val();		
+				if(isPhone(phone)){	
+					$('#hidden').html('显号报备');
+					$('#showPhone').hide();
+					var hide = hidePhone(phone);						
+					$('#hidePhone').show().val(hide);
+				}
+			}
+		}
+//		隐藏手机号码中间四位数
+		function hidePhone(phone){
+			var frist = phone.substr(0,3);
+			var last = phone.substr(7,4);
+			return frist+'****'+last ;
+		}
+		
+		//手机号码格式验证
+		function isPhone(phone){
+		   var regMobile=/^1\d{10}$/;
+		   if(regMobile.test(phone) === false)  
+		   {  
+		       webToast("手机号码格式不正确",'middle',3000);  
+		       return  false;  
+		   }else
+		   return true
+		} 
+//		按钮切换
+		$('#hidden').bind('click',function(){ tagPhone(); });
+//		第一次加载 进行判断
+		if($('#ub_id').val() != ''){tagPhone(); }
+		
+		
+			(function($) {
+				
+				
+				var result = $('#seetime');
+				var btns = $('#seetime');
+				btns.each(function(i, btn) {
+					btn.addEventListener('tap', function() {
+						var optionsJson = this.getAttribute('data-options') || '{}';
+						var options = JSON.parse(optionsJson);
+						var id = this.getAttribute('id');
+						/*
+						 * 首次显示时实例化组件
+						 * 示例为了简洁，将 options 放在了按钮的 dom 上
+						 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+						 */
+						var picker = new $.DtPicker(options);
+						picker.show(function(rs) {
+							/*
+							 * rs.value 拼合后的 value
+							 * rs.text 拼合后的 text
+							 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+							 * rs.m 月，用法同年
+							 * rs.d 日，用法同年
+							 * rs.h 时，用法同年
+							 * rs.i 分（minutes 的第二个字母），用法同年
+							 */
+							document.getElementById('seetime').value= rs.text ;
+							/* 
+							 * 返回 false 可以阻止选择框的关闭
+							 * return false;
+							 */
+							/*
+							 * 释放组件资源，释放后将将不能再操作组件
+							 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+							 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+							 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+							 */
+							picker.dispose();
+						});
+					}, false);
+				});
+			})(mui);
+		</script>	
