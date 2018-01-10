@@ -171,18 +171,20 @@
 				<label>楼盘图片</label>
 				<volist name="row.picture" id="vo">
 					<b>
-					<img class="upImg" id="old{$vo.picture_id}" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>">
+						<em>删除</em>
+					<img class="upImg" id="old{$vo.picture_id}" style="display: inline; float: none;" src="<empty name='vo.url'>__PUBLIC__/Home/images/add.png<else />{$vo.url}</empty>">
 					<input type="hidden" name="picture[]" class="pichidden" value="{$vo.url}" />
 					<input type="hidden" name="picture_id[]" value="{$vo.picture_id}" />
-					<em>删除</em>
+					
 	         	</b>
 				</volist>
 				<for start="0" end="$pic_num">
 				<b>
-					<img class="upImg" id="new{$i}" src="__PUBLIC__/Home/images/add.png">
+					<img class="upImg" id="new{$i}" style="display: inline; float: none;" src="__PUBLIC__/Home/images/add.png">
 					<input type="hidden" name="picture[]" class="pichidden" value="" />
-					<em>删除</em>
-	         	</b>
+					
+				</b>
+	         	
 				</for>
 
 			</li>

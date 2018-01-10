@@ -22,14 +22,10 @@ function checkImage(img)
 	if(typeof(img) != 'undefined') { if(  img.length > 0) { return img; } else { return _public+'/Home/images/no_picture.png'; }
 	} else { return _public+'/Home/images/no_picture.png'; }
 }
- //途径生成替换
 
+ //路径生成替换
 function replace_url(regexp,replacement,stringObject){
-//	console.log(regexp) ;
-//	console.log(replacement) ;
-//	console.log(stringObject) ;
-	return stringObject.replace(regexp,replacement) ;
-	
+	return stringObject.replace(regexp,replacement) ;	
 }
 
 $(function(){

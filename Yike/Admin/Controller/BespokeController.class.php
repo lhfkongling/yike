@@ -70,6 +70,8 @@ class BespokeController extends BaseController {
   	            $this->error($model->getError()) ;
   	            die ;
   	        }
+			//预约房源标题
+			$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('');
   	         
   	        unset($data['__hash__']) ;
   	        if($data['ub_id']){  	          
@@ -79,13 +81,13 @@ class BespokeController extends BaseController {
                 //蚁客 -> 开发商   发送信息
                 $uid = $data['builduser_id'] ;
                 $openID = M('Users')-> where( [ 'user_id'=>$uid ] ) -> getField('wechat');                 
-                $content = '您有一条关于客户（'.$data['name'].'）的预约信息已有回复，请注意超查收';
+                $content = '您有一条关于于 '.$title.' 的预约信息已有回复，请注意超查收';
                 WxSendMessage($openID , $content );
   	           
   	            //开发商 -> 蚁客  发送信息
                 $uid = $data['user_id'] ;  	           
   	            $openID = M('Users')-> where( [ 'user_id'=>$uid ] ) -> getField('wechat');  	            
-  	            $content = '您有一条关于客户（'.$data['name'].'）的预约信息已有回复，请注意超查收';
+  	            $content = '您有一条关于于 '.$title.' 的预约信息已有回复，请注意超查收';
   	            WxSendMessage($openID , $content );
   	            
   	            return $data['ub_id'];

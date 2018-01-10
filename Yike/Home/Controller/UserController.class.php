@@ -259,6 +259,9 @@ class UserController extends BaseController {
         
         $data['seetime'] =  strtotime( $data['see_time'].':00:00') ;
         
+		//预约房源标题
+		$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('');
+		
 //         pr($data,1) ;
 //         if( $data['note'] )
 //             $data['agree']  = 1;
@@ -278,7 +281,7 @@ class UserController extends BaseController {
            //添加预约信息 ，给地产商 客服信息提示  您有一条预约信息，请注意超查收
            
             $openID = M('Users')-> where(['user_id'=>$data['builduser_id']]) -> getField('wechat');
-            $content = '您有一条关于客户（'.$data['name'].'）的预约信息，请注意超查收';
+            $content = '您有一条关于 '.$title.' 的预约信息，请注意超查收';
             WxSendMessage($openID , $content );
             
             $model->add_time = NOW_TIME;
@@ -287,7 +290,7 @@ class UserController extends BaseController {
         else
         {
             //修改预约信息， 蚁客/地产伤  修改信息 回复信息 
-            $content = '您有一条关于客户（'.$data['name'].'）的预约信息已有回复，请注意超查收';
+            $content = '您有一条关 '.$title.' 的预约信息已有回复，请注意超查收';
             
             if($_SESSION['user']['type'] == 1){
                 //蚁客 -> 开发商   发送信息
@@ -296,7 +299,7 @@ class UserController extends BaseController {
                 $agree = $model ->where(['ub_id' =>$data['ub_id']]) ->getField('agree') ;
                 
                 if($data['agree'] == 1 && $agree < 1 )
-                    $content = "您有一条关于客户（".$data['name']."）的预约信息已成功，请注意查收，祝您带客成功  /::) ";
+                    $content = "您有一条关于 ".$title." 的预约信息已成功，请注意查收，祝您带客成功  /::) ";
                 
                 //开发商 -> 蚁客  发送信息
                 $uid = $data['user_id'] ;

@@ -130,6 +130,8 @@ function responceBase64Image(data){
 	$('.base64Img').hide();
 	$('#'+data.picNumber).attr('src',data.url);
 	$('#'+data.picNumber).next().val(data.url);
+	$('#'+data.picNumber).before('<em>删除</em>');
+	
 }
 function closeBox(){
 	$('.base64Img').hide();	
