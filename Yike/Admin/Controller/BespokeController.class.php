@@ -71,7 +71,7 @@ class BespokeController extends BaseController {
   	            die ;
   	        }
 			//预约房源标题
-			$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('');
+			$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('name');
   	         
   	        unset($data['__hash__']) ;
   	        if($data['ub_id']){  	          

@@ -260,7 +260,7 @@ class UserController extends BaseController {
         $data['seetime'] =  strtotime( $data['see_time'].':00:00') ;
         
 		//预约房源标题
-		$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('');
+		$title = M('Houses') -> where( ['house_id' => $data['build_id'] ])->getField('name');
 		
 //         pr($data,1) ;
 //         if( $data['note'] )
