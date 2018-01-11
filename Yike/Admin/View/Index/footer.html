@@ -27,21 +27,17 @@
 		}
 		
 		var responseCheckNewBespoke = function (data){
-			if(data.type == 'prompt' ){
-				if(data.number > 0){
+			if(data.type == 'pormpt' ){			
 					prompt.play();
 					$('#embed').html(promptText);
 					$('#embed').show('slow') ;
-					setTimeout(close_embed, 10000) ;
-				}
+					setTimeout(close_embed, 10000) ;				
 			}
-			if(data.type == 'user' ){
-				if(data.number > 0){
+			if(data.type == 'user' ){			
 					user.play();
 					$('#embed').html(userText);
 					$('#embed').show('slow') ;
-					setTimeout(close_embed, 10000) ;
-				}
+					setTimeout(close_embed, 10000) ;				
 			}
 		}
 		
